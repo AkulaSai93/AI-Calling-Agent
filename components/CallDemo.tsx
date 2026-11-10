@@ -172,7 +172,7 @@ export default function CallDemo() {
         </p>
       </div>
 
-      <div className="mt-12 overflow-hidden rounded-[28px] border border-line bg-white/[0.025] shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)] backdrop-blur-md">
+      <div className="mt-12 overflow-hidden rounded-lg border border-line bg-white/[0.025] shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)] backdrop-blur-md">
         <div className="grid lg:grid-cols-[230px_minmax(0,1fr)_minmax(0,1.3fr)]">
           {/* Use cases + language */}
           <div className="border-b border-line p-4 sm:p-5 lg:border-r lg:border-b-0">
@@ -186,7 +186,7 @@ export default function CallDemo() {
                     role="tab"
                     aria-selected={on}
                     onClick={() => chooseCall(i)}
-                    className={`flex shrink-0 items-center gap-2.5 rounded-xl px-2.5 py-2 text-left text-sm whitespace-nowrap transition-colors ${
+                    className={`flex shrink-0 items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm whitespace-nowrap transition-colors ${
                       on ? "bg-white/[0.07] text-fg" : "text-muted hover:bg-white/[0.04] hover:text-fg"
                     }`}
                   >
@@ -213,7 +213,7 @@ export default function CallDemo() {
                     role="radio"
                     aria-checked={on}
                     onClick={() => chooseLang(l.code)}
-                    className={`flex items-center justify-center gap-1.5 rounded-full border px-2 py-1.5 text-[13px] transition-colors ${
+                    className={`flex items-center justify-center gap-1.5 rounded-md border px-2 py-1.5 text-[13px] transition-colors ${
                       on ? "border-brand/50 bg-brand/15 text-fg" : "border-line text-muted hover:border-line-strong hover:text-fg"
                     }`}
                   >
@@ -291,7 +291,7 @@ export default function CallDemo() {
 
             <button
               onClick={togglePlay}
-              className="relative mt-5 inline-flex items-center gap-2 rounded-full bg-gradient-deep py-2.5 pr-5 pl-4 text-sm font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-transform hover:scale-[1.03]"
+              className="relative mt-5 inline-flex items-center gap-2 rounded-md bg-gradient-deep py-2.5 pr-5 pl-4 text-sm font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-transform hover:scale-[1.03]"
             >
               {playing ? (
                 <svg viewBox="0 0 24 24" className="size-4 fill-current" aria-hidden>
@@ -317,7 +317,7 @@ export default function CallDemo() {
             <div className="flex items-center justify-between border-b border-line px-5 py-4 sm:px-6">
               <span className="text-sm font-medium">Live transcript</span>
               <span
-                className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors ${
+                className={`inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs transition-colors ${
                   finished ? "border-live/40 bg-live/10 text-live" : "border-line text-faint"
                 }`}
               >
@@ -349,10 +349,10 @@ export default function CallDemo() {
                       <div className={`flex max-w-[86%] flex-col ${isAgent ? "items-start" : "items-end"}`}>
                         <span className="mb-1 px-1 text-[11px] text-faint">{isAgent ? `${AGENT_NAME} · AI agent` : call.customer}</span>
                         <p
-                          className={`rounded-2xl px-4 py-2.5 text-[15px] leading-relaxed transition-colors ${
+                          className={`rounded-lg px-4 py-2.5 text-[15px] leading-relaxed transition-colors ${
                             isAgent
-                              ? `rounded-tl-md border text-fg ${active ? "border-brand/45 bg-brand/[0.12]" : "border-brand/20 bg-brand/[0.06]"}`
-                              : "rounded-tr-md border border-line bg-white/[0.04] text-body"
+                              ? `rounded-tl-sm border text-fg ${active ? "border-brand/45 bg-brand/[0.12]" : "border-brand/20 bg-brand/[0.06]"}`
+                              : "rounded-tr-sm border border-line bg-white/[0.04] text-body"
                           }`}
                         >
                           {words.slice(0, shown).join(" ")}

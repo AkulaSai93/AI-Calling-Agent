@@ -63,7 +63,7 @@ export function BroadcastVisual({ accent }: { accent: string }) {
           </span>
         );
       })}
-      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full border border-line bg-bg/80 px-2.5 py-1 text-[11px] whitespace-nowrap text-muted tabular-nums">
+      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-md border border-line bg-bg/80 px-2.5 py-1 text-[11px] whitespace-nowrap text-muted tabular-nums">
         {(Math.min(delivered, phones) * 1248).toLocaleString("en-IN")} delivered
       </span>
     </div>
@@ -108,7 +108,7 @@ export function KeypadVisual({ accent }: { accent: string }) {
           return (
             <li
               key={m.key}
-              className={`rounded-xl border px-2.5 py-2 text-[12px] leading-tight transition-all duration-300 ${on ? "text-fg" : "text-faint"}`}
+              className={`rounded-md border px-2.5 py-2 text-[12px] leading-tight transition-all duration-300 ${on ? "text-fg" : "text-faint"}`}
               style={{ borderColor: on ? `${accent}80` : "rgb(255 255 255 / 0.06)", background: on ? `${accent}1a` : "transparent" }}
             >
               <span className="font-medium" style={{ color: on ? accent : undefined }}>
@@ -144,7 +144,7 @@ export function ConversationVisual({ accent }: { accent: string }) {
       {visible.map((m) => (
         <p
           key={m.text}
-          className={`max-w-[85%] animate-rise rounded-2xl px-3 py-2 text-[12.5px] leading-snug ${m.ai ? "self-start rounded-bl-md text-fg" : "self-end rounded-br-md bg-white/[0.06] text-[#d4d5dd]"}`}
+          className={`max-w-[85%] animate-rise rounded-lg px-3 py-2 text-[12.5px] leading-snug ${m.ai ? "self-start rounded-bl-sm text-fg" : "self-end rounded-br-sm bg-white/[0.06] text-[#d4d5dd]"}`}
           style={m.ai ? { background: `${accent}22`, border: `1px solid ${accent}55` } : undefined}
           lang={/[ऀ-ॿ]/.test(m.text) ? "hi" : "en"}
         >

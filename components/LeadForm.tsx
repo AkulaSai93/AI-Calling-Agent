@@ -18,7 +18,7 @@ const messages: Record<Field, string> = {
 };
 
 const fieldBase =
-  "relative flex h-12 cursor-text items-center gap-2.5 rounded-3xl border bg-white/[0.025] px-4 transition-colors hover:bg-white/[0.06] focus-within:border-brand/55 focus-within:bg-brand/[0.07] [&_svg]:stroke-faint focus-within:[&_svg]:stroke-brand";
+  "relative flex h-12 cursor-text items-center gap-2.5 rounded-md border bg-white/[0.025] px-4 transition-colors hover:bg-white/[0.06] focus-within:border-brand/55 focus-within:bg-brand/[0.07] [&_svg]:stroke-faint focus-within:[&_svg]:stroke-brand";
 const inputBase = "min-w-0 flex-1 bg-transparent text-[15px] text-fg outline-none placeholder:text-faint";
 const iconBase = "size-[17px] shrink-0 fill-none stroke-[1.7] [stroke-linecap:round] [stroke-linejoin:round]";
 
@@ -57,7 +57,7 @@ export default function LeadForm() {
 
   return (
     <form onSubmit={onSubmit} noValidate className="mt-10 w-full max-w-[900px]">
-      <div className="grid grid-cols-1 gap-1.5 rounded-3xl border border-line bg-white/[0.04] p-1.5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.8),0_0_0_6px_rgb(136_152_231/0.04)] backdrop-blur-md sm:grid-cols-2 sm:rounded-[26px] lg:grid-cols-[1fr_1.15fr_1fr_auto] lg:rounded-[30px]">
+      <div className="grid grid-cols-1 gap-1.5 rounded-lg border border-line bg-white/[0.04] p-1.5 shadow-[0_30px_80px_-30px_rgb(0_0_0/0.8),0_0_0_6px_rgb(136_152_231/0.04)] backdrop-blur-md sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] sm:rounded-lg lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)_minmax(0,1fr)_auto] lg:rounded-lg">
         <label className={`${fieldBase} ${border("name")}`}>
           <span className="sr-only">Full name</span>
           <svg viewBox="0 0 24 24" aria-hidden className={iconBase}>
@@ -85,7 +85,7 @@ export default function LeadForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-deep bg-size-[160%_100%] bg-left px-[22px] text-[15px] font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-[transform,box-shadow,background-position,opacity] duration-500 hover:-translate-y-px hover:bg-right disabled:cursor-progress disabled:opacity-70 sm:col-span-2 lg:col-span-1"
+          className="group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gradient-deep bg-size-[160%_100%] bg-left px-[22px] text-[15px] font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-[transform,box-shadow,background-position,opacity] duration-500 hover:-translate-y-px hover:bg-right disabled:cursor-progress disabled:opacity-70 sm:col-span-2 lg:col-span-1"
         >
           {status === "submitting" ? "Connecting…" : status === "success" ? "Calling you now" : "Get a demo call"}
           <svg viewBox="0 0 24 24" aria-hidden className="size-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round] transition-transform group-hover:translate-x-[3px]">

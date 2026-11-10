@@ -4,6 +4,11 @@ import Hero from "@/components/Hero";
 import CallDemo from "@/components/CallDemo";
 import LanguageStrip from "@/components/LanguageStrip";
 import Offerings from "@/components/Offerings";
+import HowItWorks from "@/components/HowItWorks";
+import Benchmarks from "@/components/Benchmarks";
+import Comparison from "@/components/Comparison";
+import Faq from "@/components/Faq";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -15,7 +20,12 @@ export default function Home() {
         <CallDemo />
         <LanguageStrip />
         <Offerings />
+        <HowItWorks />
+        <Benchmarks />
+        <Comparison />
+        <Faq />
       </main>
+      <Footer />
     </>
   );
 }

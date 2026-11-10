@@ -1,14 +1,19 @@
 import LeadForm from "./LeadForm";
 import Usps from "./Usps";
+import HeroVoice from "./HeroVoice";
 
 // Staggered entrance for each hero row
 const rise = (delay: string) => ({ style: { animationDelay: delay } });
 
 export default function Hero() {
   return (
-    <section id="demo" className="mx-auto flex max-w-[1200px] flex-col items-center px-4 pt-16 pb-20 text-center sm:px-6 sm:pt-28 sm:pb-24">
+    <section id="demo" className="mx-auto flex max-w-[1200px] flex-col items-center px-4 pt-12 pb-20 text-center sm:px-6 sm:pt-16 sm:pb-24">
+      <div {...rise("0s")} className="mb-10 flex w-full animate-rise justify-center sm:mb-12">
+        <HeroVoice />
+      </div>
+
       <h1
-        {...rise("0s")}
+        {...rise(".06s")}
         className="max-w-[980px] animate-rise text-[clamp(36px,6.2vw,76px)] leading-[1.04] font-medium tracking-[-0.035em] text-balance text-transparent bg-linear-to-b from-white from-30% to-[#a3a7b8] bg-clip-text"
       >
         AI calling agents that<br className="hidden sm:block" /> sound{" "}
