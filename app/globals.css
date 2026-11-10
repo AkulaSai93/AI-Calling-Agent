@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), var(--font-devanagari), var(--font-tamil), var(--font-telugu), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-instrument-serif), Georgia, serif;
+
+  /* Dark theme */
+  --color-bg: #000000;
+  --color-surface: #0b0b0d;
+  --color-fg: #f2f2f5;
+  --color-body: #d4d5dd;
+  --color-muted: #9a9ba6;
+  --color-faint: #66676f;
+  --color-line: rgb(255 255 255 / 0.1);
+  --color-line-strong: rgb(255 255 255 / 0.18);
+  --color-star: #fcd34d;
+  --color-live: #4ade80;
+  --color-danger: #f87171;
+
+  /* Brand blue (from TitanGate's #8898e7), light → deep */
+  --color-brand-light: #c3cbff;
+  --color-brand: #8898e7;
+  --color-brand-deep: #6f80e0;
+  --color-brand-deeper: #5b6bd6;
+
+  --animate-rise: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-bar: bar 1.2s ease-in-out infinite;
+  --animate-ping-soft: ping-soft 1.8s infinite;
+  --animate-wave: wave 1s ease-in-out infinite;
+  --animate-ring: ring 1.6s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+  }
+  @keyframes bar {
+    50% { transform: scaleY(0.45); }
+  }
+  @keyframes ping-soft {
+    70% { box-shadow: 0 0 0 7px rgb(74 222 128 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(74 222 128 / 0); }
+  }
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+  }
+  @keyframes progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  @keyframes ring {
+    from { transform: scale(0.85); opacity: 0.8; }
+    to { transform: scale(1.45); opacity: 0; }
+  }
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(90deg, var(--color-brand-light) 0%, var(--color-brand) 34%, var(--color-brand-deep) 67%, var(--color-brand-deeper) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Deeper version of the brand gradient for buttons with white text */
+@utility bg-gradient-deep {
+  background-image: linear-gradient(90deg, #8898e7 0%, #6f80e0 45%, #4f60cf 100%);
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-fg font-sans antialiased min-h-screen overflow-x-hidden;
+  }
+  ::selection {
+    background: rgb(136 152 231 / 0.3);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

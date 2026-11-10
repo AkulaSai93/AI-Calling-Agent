@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voxa AI — AI Calling Agents</title>
+  <meta name="description" content="Human-like AI calling agents that qualify leads, book meetings and resolve support calls 24/7 in 15+ languages." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Reusable laurel branch (left side; mirrored with .laurel--right) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <path id="leaf" d="M0 0 C4.5 -4 4.5 -10 0 -15 C-4.5 -10 -4.5 -4 0 0Z" />
+      <symbol id="laurel" viewBox="0 0 40 84">
+        <path d="M30 80 C14 66 8 40 19 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        <use href="#leaf" transform="translate(25 72) rotate(-62)" />
+        <use href="#leaf" transform="translate(18 60) rotate(-52)" />
+        <use href="#leaf" transform="translate(13.5 47) rotate(-40)" />
+        <use href="#leaf" transform="translate(12.5 34) rotate(-26)" />
+        <use href="#leaf" transform="translate(14.5 21) rotate(-12)" />
+        <use href="#leaf" transform="translate(26 70) rotate(18)" />
+        <use href="#leaf" transform="translate(19.5 57) rotate(14)" />
+        <use href="#leaf" transform="translate(16 44) rotate(10)" />
+        <use href="#leaf" transform="translate(15.5 31) rotate(8)" />
+        <use href="#leaf" transform="translate(19 8) rotate(4)" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="bg" aria-hidden="true">
+    <div class="bg__grid"></div>
+    <div class="bg__glow"></div>
+  </div>
+
+  <header class="nav">
+    <a href="#" class="brand" aria-label="Voxa AI home">
+      <span class="brand__mark" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <span>Voxa<span class="brand__ai">AI</span></span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#">Product</a>
+      <a href="#">Use cases</a>
+      <a href="#">Integrations</a>
+      <a href="#">Pricing</a>
+    </nav>
+    <div class="nav__actions">
+      <a href="#" class="nav__login">Log in</a>
+      <a href="#demo" class="btn btn--light btn--sm">Book a demo</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="demo">
+      <div class="proof">
+        <svg class="laurel" aria-hidden="true"><use href="#laurel" /></svg>
+        <div class="proof__pill">
+          <div class="avatars" aria-hidden="true">
+            <img src="https://i.pravatar.cc/80?img=12" alt="" />
+            <img src="https://i.pravatar.cc/80?img=33" alt="" />
+            <img src="https://i.pravatar.cc/80?img=59" alt="" />
+            <img src="https://i.pravatar.cc/80?img=68" alt="" />
+          </div>
+          <span class="proof__text">500+ businesses trust Voxa</span>
+          <span class="proof__rating">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg>
+            4.9
+          </span>
+        </div>
+        <svg class="laurel laurel--right" aria-hidden="true"><use href="#laurel" /></svg>
+      </div>
+
+      <h1 class="hero__title">
+        AI calling agents that<br />
+        sound <em>human</em> &amp; sell 24/7
+      </h1>
+
+      <p class="hero__sub">
+        Qualify leads, book meetings and resolve support calls around the clock —
+        in 15+ languages, with sub-second response times and zero hold music.
+      </p>
+
+      <form class="lead" id="leadForm" novalidate>
+        <div class="lead__fields">
+          <label class="field">
+            <span class="sr-only">Full name</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>
+            <input name="name" type="text" placeholder="Full name" autocomplete="name" required />
+          </label>
+          <label class="field">
+            <span class="sr-only">Work email</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <input name="email" type="email" placeholder="Work email" autocomplete="email" required />
+          </label>
+          <label class="field field--phone">
+            <span class="sr-only">Phone number</span>
+            <span class="field__code">+91</span>
+            <input name="phone" type="tel" placeholder="Phone number" autocomplete="tel-national" inputmode="numeric" maxlength="10" required />
+          </label>
+          <button type="submit" class="btn btn--primary">
+            <span class="btn__label">Get a demo call</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="lead__note" id="leadNote">
+          <span class="live-dot" aria-hidden="true"></span>
+          Our AI agent calls you in 30 seconds. No spam.
+        </p>
+      </form>
+
+      <ul class="usps" aria-label="Why Voxa">
+        <li class="usp">
+          <svg class="laurel" aria-hidden="true"><use href="#laurel" /></svg>
+          <div><strong>10M+</strong><span>calls handled</span></div>
+          <svg class="laurel laurel--right" aria-hidden="true"><use href="#laurel" /></svg>
+        </li>
+        <li class="usp">
+          <svg class="laurel" aria-hidden="true"><use href="#laurel" /></svg>
+          <div><strong>&lt;500ms</strong><span>response latency</span></div>
+          <svg class="laurel laurel--right" aria-hidden="true"><use href="#laurel" /></svg>
+        </li>
+        <li class="usp">
+          <svg class="laurel" aria-hidden="true"><use href="#laurel" /></svg>
+          <div><strong>15+</strong><span>languages &amp; accents</span></div>
+          <svg class="laurel laurel--right" aria-hidden="true"><use href="#laurel" /></svg>
+        </li>
+        <li class="usp">
+          <svg class="laurel" aria-hidden="true"><use href="#laurel" /></svg>
+          <div><strong>70%</strong><span>lower calling cost</span></div>
+          <svg class="laurel laurel--right" aria-hidden="true"><use href="#laurel" /></svg>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
