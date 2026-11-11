@@ -173,11 +173,11 @@ export default function CallDemo() {
       </div>
 
       <div className="mt-12 overflow-hidden rounded-lg border border-line bg-white/[0.025] shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)] backdrop-blur-md">
-        <div className="grid lg:grid-cols-[230px_minmax(0,1fr)_minmax(0,1.3fr)]">
+        <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[230px_minmax(0,1fr)_minmax(0,1.3fr)]">
           {/* Use cases + language */}
           <div className="border-b border-line p-4 sm:p-5 lg:border-r lg:border-b-0">
             <p className="px-2 text-xs text-faint">Choose a use case</p>
-            <div role="tablist" aria-label="Use case" className="mt-2.5 flex gap-1 overflow-x-auto [scrollbar-width:none] lg:flex-col">
+            <div role="tablist" aria-label="Use case" className="-mr-4 mt-2.5 flex gap-1 overflow-x-auto pr-4 [scrollbar-width:none] [mask-image:linear-gradient(90deg,#000_80%,transparent)] lg:mr-0 lg:flex-col lg:pr-0 lg:[mask-image:none]">
               {calls.map((c, i) => {
                 const on = i === callIdx;
                 return (
@@ -226,7 +226,7 @@ export default function CallDemo() {
           </div>
 
           {/* Call panel */}
-          <div className="relative flex flex-col items-center border-b border-line px-6 pt-6 pb-8 lg:border-r lg:border-b-0">
+          <div className="relative flex flex-col items-center border-b border-line px-4 pt-5 pb-7 sm:px-6 sm:pt-6 sm:pb-8 lg:border-r lg:border-b-0">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0"
@@ -241,7 +241,7 @@ export default function CallDemo() {
             </div>
 
             {/* Agent orb */}
-            <div className="relative mt-10 grid size-32 place-items-center">
+            <div className="relative mt-6 grid size-24 place-items-center sm:mt-10 sm:size-32">
               {playing && speaker === "agent" && (
                 <>
                   <span className="absolute inset-0 rounded-full border border-brand/40 animate-ring" />
@@ -249,7 +249,7 @@ export default function CallDemo() {
                 </>
               )}
               <div
-                className={`size-28 rounded-full shadow-[0_20px_60px_-10px_rgb(136_152_231/0.6)] transition-transform duration-500 ${playing && speaker === "agent" ? "scale-105" : ""}`}
+                className={`size-20 rounded-full sm:size-28 shadow-[0_20px_60px_-10px_rgb(136_152_231/0.6)] transition-transform duration-500 ${playing && speaker === "agent" ? "scale-105" : ""}`}
                 style={{
                   background:
                     "radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.55), transparent 38%), radial-gradient(circle at 70% 75%, #5566d4, transparent 55%), radial-gradient(circle at 25% 75%, #a3b0f5, transparent 60%), linear-gradient(135deg, #c3cbff, #8898e7 50%, #6f80e0)",
@@ -328,7 +328,7 @@ export default function CallDemo() {
               </span>
             </div>
 
-            <div ref={transcriptRef} className="relative h-[400px] overflow-y-auto px-4 py-6 [scrollbar-width:thin] sm:h-[440px] sm:px-6">
+            <div ref={transcriptRef} className="relative h-[360px] overflow-y-auto px-4 py-6 [scrollbar-width:thin] sm:h-[440px] sm:px-6">
               <ol className="flex flex-col gap-4" lang={lang}>
                 {lines.map((line, i) => {
                   const isAgent = line.from === "agent";

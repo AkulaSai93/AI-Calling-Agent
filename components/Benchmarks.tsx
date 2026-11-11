@@ -49,7 +49,7 @@ export default function Benchmarks() {
 
   return (
     <section id="benchmarks" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
-      <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+      <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-end md:justify-between md:text-left">
         <div className="max-w-[560px]">
           <p className="text-gradient text-sm font-medium tracking-wide">Our benchmarks</p>
           <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
@@ -67,7 +67,7 @@ export default function Benchmarks() {
           return (
             <div
               key={s.label}
-              className={`group relative border-b border-line px-1 py-10 sm:px-8 sm:py-12 ${i % 2 === 1 ? "sm:border-l" : ""} ${
+              className={`group relative border-b border-line px-1 py-10 text-center sm:px-8 sm:text-left sm:py-12 ${i % 2 === 1 ? "sm:border-l" : ""} ${
                 i % 3 !== 0 ? "lg:border-l" : "lg:border-l-0"
               }`}
             >
@@ -77,7 +77,7 @@ export default function Benchmarks() {
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 style={{ background: "radial-gradient(60% 60% at 30% 40%, rgb(136 152 231 / 0.10), transparent 70%)" }}
               />
-              <dd className="relative flex items-baseline leading-none tabular-nums">
+              <dd className="relative flex items-baseline justify-center leading-none tabular-nums sm:justify-start">
                 {s.prefix && <span className="mr-1 text-[clamp(32px,3.6vw,52px)] font-medium text-muted">{s.prefix}</span>}
                 <span className="bg-linear-to-b from-white from-30% to-[#a3a7b8] bg-clip-text text-[clamp(64px,7.4vw,108px)] font-medium tracking-[-0.05em] text-transparent">
                   {shown}
@@ -91,7 +91,7 @@ export default function Benchmarks() {
         })}
       </dl>
 
-      <p className="mt-6 text-xs text-faint">Benchmarks from Voxa production traffic, Jan–Sep 2026. Individual results vary by use case.</p>
+      <p className="mt-6 text-center text-xs text-faint sm:text-left">Benchmarks from Voxa production traffic, Jan–Sep 2026. Individual results vary by use case.</p>
     </section>
   );
 }
