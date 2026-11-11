@@ -6,7 +6,7 @@ type Mark = "yes" | "partial" | "no";
 type Cell = { mark: Mark; text: string };
 type Row = { feature: string; voxa: Cell; centre: Cell; ivr: Cell };
 
-// Typical figures for the Indian market — adjust to your own pricing and claims.
+// Typical figures for the Indian market; adjust to your own pricing and claims.
 const rows: Row[] = [
   {
     feature: "Availability",
@@ -57,82 +57,80 @@ const others = [
   { id: "ivr", label: "Basic IVR" },
 ] as const;
 
-function MarkIcon({ mark }: { mark: Mark }) {
+function MarkIcon({ mark, accent }: { mark: Mark; accent?: boolean }) {
   if (mark === "yes")
     return (
-      <span className="grid size-5 shrink-0 place-items-center rounded-full bg-brand/20 text-brand-light">
-        <svg viewBox="0 0 24 24" aria-label="Yes" className="size-3 fill-none stroke-current stroke-[3] [stroke-linecap:round] [stroke-linejoin:round]">
-          <path d="m5 12 5 5 9-10" />
-        </svg>
-      </span>
+      <svg viewBox="0 0 24 24" aria-label="Yes" className={`mt-[3px] size-4 shrink-0 fill-none stroke-[2.4] [stroke-linecap:round] [stroke-linejoin:round] ${accent ? "stroke-brand" : "stroke-[#9a9ba6]"}`}>
+        <path d="m5 12.5 4.5 4.5L19 7.5" />
+      </svg>
     );
   if (mark === "partial")
     return (
-      <span className="grid size-5 shrink-0 place-items-center rounded-full border border-line-strong" aria-label="Partly">
-        <span className="h-[2px] w-2 rounded-full bg-muted" />
-      </span>
+      <svg viewBox="0 0 24 24" aria-label="Partly" className="mt-[3px] size-4 shrink-0 fill-none stroke-[#5d5e66] stroke-[2.4] [stroke-linecap:round]">
+        <path d="M7 12h10" />
+      </svg>
     );
   return (
-    <span className="grid size-5 shrink-0 place-items-center rounded-full bg-white/[0.04] text-faint">
-      <svg viewBox="0 0 24 24" aria-label="No" className="size-2.5 fill-none stroke-current stroke-[3] [stroke-linecap:round]">
-        <path d="M6 6l12 12M18 6 6 18" />
-      </svg>
-    </span>
+    <svg viewBox="0 0 24 24" aria-label="No" className="mt-[3px] size-4 shrink-0 fill-none stroke-[#4a4b52] stroke-[2.2] [stroke-linecap:round]">
+      <path d="M7.5 7.5l9 9M16.5 7.5l-9 9" />
+    </svg>
   );
 }
+
+const cols = "grid grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)_minmax(0,1fr)] md:grid-cols-[minmax(0,1.1fr)_minmax(0,1.15fr)_minmax(0,1fr)_minmax(0,1fr)]";
+const mono = "font-mono text-[11px] tracking-[0.22em] uppercase";
+// The Voxa column is one continuous soft panel: side borders on every cell, rounded at top and bottom
+const voxaCell = "border-x border-brand/25 bg-brand/[0.05] px-4 md:px-6";
 
 export default function Comparison() {
   // On phones only one competitor fits beside Voxa; let the visitor pick which
   const [vs, setVs] = useState<(typeof others)[number]["id"]>("centre");
-
-  const otherCell = (id: (typeof others)[number]["id"]) =>
-    `${id === vs ? "flex" : "hidden"} md:flex`;
+  const show = (id: (typeof others)[number]["id"]) => `${id === vs ? "flex" : "hidden"} md:flex`;
 
   return (
-    <section id="compare" className="mx-auto flex max-w-[1200px] flex-col justify-center px-4 py-16 sm:px-6 md:min-h-[calc(100svh-72px)] md:py-6">
-      <div data-reveal className="mx-auto max-w-[720px] text-center">
-        <p className="font-mono text-[11px] tracking-[0.28em] text-muted uppercase">Why Voxa</p>
-        <h2 className="mt-2 text-[clamp(28px,3.6vw,44px)] leading-[1.08] font-light tracking-[-0.03em] text-balance">
-          A <span className="text-[#6e6f78]">smarter</span> way to make every call
-        </h2>
-        <p className="mt-3 text-base leading-relaxed text-balance text-muted">
-          The warmth of a human agent and the scale of automation — without the cost of either.
+    <section id="compare" className="mx-auto flex max-w-[1200px] flex-col justify-center px-4 py-20 sm:px-6 md:min-h-[calc(100svh-72px)] md:py-6">
+      <div data-reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p className="font-mono text-[11px] tracking-[0.28em] text-muted uppercase">Why Voxa</p>
+          <h2 className="mt-3 text-[clamp(30px,4vw,48px)] leading-[1.08] font-light tracking-[-0.03em] text-balance">
+            A <span className="text-[#6e6f78]">smarter</span> way to make every call
+          </h2>
+        </div>
+        <p className="max-w-[340px] text-[15px] leading-relaxed text-muted">
+          The warmth of a human agent and the scale of automation, without the cost of either.
         </p>
       </div>
 
       {/* Mobile: choose what to compare against */}
-      <div className="mt-10 flex justify-center md:hidden">
-        <div role="tablist" aria-label="Compare Voxa with" className="flex gap-1 rounded-md border border-line p-1">
-          {others.map((o) => (
-            <button
-              key={o.id}
-              role="tab"
-              aria-selected={vs === o.id}
-              onClick={() => setVs(o.id)}
-              className={`rounded-md px-4 py-1.5 text-sm transition-colors ${vs === o.id ? "bg-white/[0.08] text-fg" : "text-muted"}`}
-            >
-              vs {o.label}
-            </button>
-          ))}
-        </div>
+      <div role="tablist" aria-label="Compare Voxa with" className="mt-10 flex gap-6 border-b border-line md:hidden">
+        {others.map((o) => (
+          <button
+            key={o.id}
+            role="tab"
+            aria-selected={vs === o.id}
+            onClick={() => setVs(o.id)}
+            className={`-mb-px border-b pb-3 ${mono} transition-colors ${vs === o.id ? "border-fg text-fg" : "border-transparent text-faint"}`}
+          >
+            vs {o.label}
+          </button>
+        ))}
       </div>
 
-      <div role="table" data-stagger aria-label="Voxa compared with call centres and IVR" className="mt-8">
+      <div role="table" data-stagger aria-label="Voxa compared with call centres and IVR" className="mt-8 md:mt-7">
         {/* Header */}
-        <div role="row" className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)_minmax(0,1fr)] md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
-          <div role="columnheader" className="hidden md:block" />
-          <div role="columnheader" className="sr-only md:hidden">Feature</div>
-          <div
-            role="columnheader"
-            className="col-start-2 rounded-t-lg border-x border-t border-brand/30 bg-brand/[0.07] px-3 pt-4 pb-3 md:col-start-auto md:px-6"
-          >
-            <span className="inline-flex items-center gap-2 text-lg font-medium md:text-xl">
-              Voxa <span className="text-gradient">AI</span>
+        <div role="row" className={cols}>
+          <div role="columnheader" className={`${mono} flex items-end pb-3 text-faint`}>
+            Feature
+          </div>
+          <div role="columnheader" className={`${voxaCell} rounded-t-lg border-t pt-4 pb-3`}>
+            <span className="flex items-center gap-2 text-[17px] font-normal text-fg">
+              <span className="size-1.5 rounded-full bg-brand" />
+              Voxa AI
             </span>
-            <span className="mt-1 block text-[11px] tracking-[0.14em] text-brand-light uppercase">Recommended</span>
+            <span className={`mt-1 block ${mono} text-[10px] text-brand`}>Recommended</span>
           </div>
           {others.map((o) => (
-            <div key={o.id} role="columnheader" className={`${otherCell(o.id)} flex-col justify-end px-3 pb-3 text-base text-muted md:px-6 md:text-lg`}>
+            <div key={o.id} role="columnheader" className={`${show(o.id)} items-end px-4 pb-3 ${mono} text-faint md:px-6`}>
               {o.label}
             </div>
           ))}
@@ -140,45 +138,48 @@ export default function Comparison() {
 
         {/* Rows */}
         {rows.map((r) => (
-          <div key={r.feature} role="row" className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)_minmax(0,1fr)] md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
-            <div role="rowheader" className="flex items-center border-t border-line py-3.5 pr-2 text-[13px] text-body md:py-2.5 md:text-[15px]">
+          <div key={r.feature} role="row" className={cols}>
+            <div role="rowheader" className="flex items-start border-t border-line py-4 pr-3 text-[14px] text-muted md:py-3 md:text-[15px]">
               {r.feature}
             </div>
-            <div role="cell" className="flex items-start gap-2 border-x border-t border-x-brand/30 border-t-line bg-brand/[0.07] px-3 py-3.5 md:gap-2.5 md:items-center md:px-6 md:py-2.5">
-              <MarkIcon mark={r.voxa.mark} />
-              <span className="text-[13px] leading-snug text-fg md:text-[14.5px]">{r.voxa.text}</span>
+            <div role="cell" className={`${voxaCell} flex gap-2.5 border-t border-t-brand/15 py-4 text-[14px] text-fg md:py-3 md:text-[15px]`}>
+              <MarkIcon mark={r.voxa.mark} accent />
+              {r.voxa.text}
             </div>
             {others.map((o) => {
               const cell = r[o.id];
               return (
-                <div key={o.id} role="cell" className={`${otherCell(o.id)} items-start gap-2 border-t border-line px-3 py-3.5 md:items-center md:gap-2.5 md:px-6 md:py-2.5`}>
+                <div key={o.id} role="cell" className={`${show(o.id)} gap-2.5 border-t border-line px-4 py-4 text-[14px] text-[#7d7e88] md:px-6 md:py-3 md:text-[15px]`}>
                   <MarkIcon mark={cell.mark} />
-                  <span className="text-[13px] leading-snug text-muted md:text-[14.5px]">{cell.text}</span>
+                  {cell.text}
                 </div>
               );
             })}
           </div>
         ))}
 
-        {/* Footer row with CTA */}
-        <div role="row" className="grid grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)_minmax(0,1fr)] md:grid-cols-[minmax(0,1.3fr)_minmax(0,1.2fr)_minmax(0,1fr)_minmax(0,1fr)]">
-          <div role="cell" className="border-t border-line pt-4 pr-3 text-[13px] leading-relaxed text-faint md:text-sm">
-            Up to 70% cheaper than a call centre, far smarter than IVR.
+        {/* Footer row with CTA inside the Voxa column */}
+        <div role="row" className={cols}>
+          <div role="cell" className="border-t border-line pt-5 pr-3 text-[14px] leading-relaxed text-muted">
+            Up to <span className="text-fg">70% cheaper</span> than a call centre, far smarter than IVR.
           </div>
-          <div role="cell" className="rounded-b-lg border-x border-b border-t border-brand/30 border-t-line bg-brand/[0.07] px-3 py-4 md:px-6">
+          <div role="cell" className={`${voxaCell} rounded-b-lg border-t border-b border-t-brand/15 py-4`}>
             <a
-              data-magnetic
               href="#demo"
-              className="group inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-deep px-3 py-2.5 text-[13px] font-medium whitespace-nowrap sm:text-sm text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-transform hover:-translate-y-px"
+              data-magnetic
+              className="group flex w-full items-center justify-center gap-2 rounded-md bg-fg px-2 py-2.5 font-mono text-[10px] tracking-[0.12em] whitespace-nowrap text-bg uppercase sm:justify-between sm:pr-2.5 sm:pl-4 sm:text-[11px] sm:tracking-[0.16em] transition-colors hover:bg-white"
             >
-              Try Voxa free
-              <svg viewBox="0 0 24 24" aria-hidden className="hidden size-4 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round] transition-transform group-hover:translate-x-[3px] sm:block">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
+              <span className="sm:hidden">Try free</span>
+              <span className="hidden sm:inline">Try Voxa free</span>
+              <span className="hidden size-6 place-items-center rounded-[4px] bg-bg text-fg transition-transform group-hover:translate-x-0.5 sm:grid">
+                <svg viewBox="0 0 24 24" aria-hidden className="size-3 fill-none stroke-current stroke-[2.5] [stroke-linecap:round] [stroke-linejoin:round]">
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
             </a>
           </div>
           {others.map((o) => (
-            <div key={o.id} role="cell" className={`${otherCell(o.id)} border-t border-line`} />
+            <div key={o.id} role="cell" className={`${show(o.id)} border-t border-line`} />
           ))}
         </div>
       </div>

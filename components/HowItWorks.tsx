@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const STEP_MS = 3200;
 
@@ -91,12 +91,57 @@ function Visual({ kind, on }: { kind: (typeof steps)[number]["visual"]; on: bool
 export default function HowItWorks() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [mobile, setMobile] = useState(false);
+  const [fill, setFill] = useState(0); // 0–1, how far the vertical line is drawn on phones
+  const [span, setSpan] = useState(0); // px distance from the first dot to the last
+  const listRef = useRef<HTMLOListElement>(null);
+  const nodeRefs = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
-    if (paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const mq = window.matchMedia("(max-width: 767px)");
+    const update = () => setMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  // Desktop: steps cycle on a timer (hover pauses)
+  useEffect(() => {
+    if (mobile || paused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const id = setInterval(() => setActive((a) => (a + 1) % steps.length), STEP_MS);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, mobile]);
+
+  // Phones: the line follows the scroll; a step lights up when its dot passes the middle of the screen
+  useEffect(() => {
+    if (!mobile) return;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const list = listRef.current;
+        if (!list) return;
+        const mid = window.innerHeight * 0.55;
+        const first = nodeRefs.current[0]?.getBoundingClientRect().top ?? 0;
+        const last = nodeRefs.current[steps.length - 1]?.getBoundingClientRect().top ?? 1;
+        setSpan(last - first);
+        setFill(Math.min(1, Math.max(0, (mid - first) / (last - first))));
+        let idx = 0;
+        nodeRefs.current.forEach((n, i) => {
+          if (n && n.getBoundingClientRect().top <= mid) idx = i;
+        });
+        setActive(idx);
+      });
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [mobile]);
 
   const progress = active / (steps.length - 1);
 
@@ -113,6 +158,7 @@ export default function HowItWorks() {
       </div>
 
       <ol
+        ref={listRef}
         data-stagger
         className="relative mt-16 grid gap-10 md:mt-20 md:grid-cols-4 md:gap-8"
         onMouseLeave={() => setPaused(false)}
@@ -124,11 +170,11 @@ export default function HowItWorks() {
           className="absolute top-[7px] left-[12.5%] hidden h-px bg-[linear-gradient(90deg,#c3cbff,#8898e7,#6f80e0)] transition-[width] duration-700 ease-out md:block"
           style={{ width: `${progress * 75}%` }}
         />
-        <span aria-hidden className="absolute top-2 bottom-2 left-[7px] w-px bg-line md:hidden" />
+        <span aria-hidden className="absolute top-2 left-[7px] w-px bg-line md:hidden" style={{ height: span ? `${span}px` : undefined }} />
         <span
           aria-hidden
-          className="absolute top-2 left-[7px] w-px bg-[linear-gradient(180deg,#c3cbff,#8898e7,#6f80e0)] transition-[height] duration-700 ease-out md:hidden"
-          style={{ height: `calc(${progress * 100}% - ${progress * 16}px)` }}
+          className="absolute top-2 left-[7px] w-px bg-[linear-gradient(180deg,#c3cbff,#8898e7,#6f80e0)] md:hidden"
+          style={{ height: `${span * fill}px` }}
         />
 
         {steps.map((s, i) => {
@@ -139,6 +185,7 @@ export default function HowItWorks() {
               key={s.title}
               className="relative pl-10 md:pl-0 md:text-center"
               onMouseEnter={() => {
+                if (mobile) return;
                 setActive(i);
                 setPaused(true);
               }}
@@ -146,6 +193,9 @@ export default function HowItWorks() {
               {/* Node */}
               <span
                 aria-hidden
+                ref={(el) => {
+                  nodeRefs.current[i] = el;
+                }}
                 className="absolute top-0 left-0 grid size-[15px] place-items-center md:relative md:mx-auto"
               >
                 {on && <span className="absolute inset-0 rounded-full bg-brand animate-ring" />}
