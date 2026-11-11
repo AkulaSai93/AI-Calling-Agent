@@ -21,10 +21,10 @@ export const offerings: Offering[] = [
     step: "01",
     stage: "Announce",
     name: "One-way calling",
-    tagline: "Personalised voice broadcasts that reach thousands of customers in minutes.",
+    tagline: "Personalised voice broadcasts to thousands, in minutes.",
     accent: "#c3cbff",
     unique:
-      "Every call is generated live with the customer's name, amount and date — in their own language. No more one generic recording for everyone.",
+      "Every call is personalised with the customer's name, amount and date, in their language.",
     features: [
       "Payment, EMI & renewal reminders",
       "Appointment & delivery alerts",
@@ -40,10 +40,10 @@ export const offerings: Offering[] = [
     step: "02",
     stage: "Interact",
     name: "AVR calling",
-    tagline: "Automated voice response — customers press 1, 2 or 3 to act right on the call.",
+    tagline: "Customers press or say 1, 2 or 3 to act on the call.",
     accent: "#8898e7",
     unique:
-      "Speak or press — callers can simply say “one” or “reschedule” instead of hunting for keys, and every response syncs to your CRM instantly.",
+      "Callers can just say “reschedule” instead of pressing keys. Every answer syncs to your CRM.",
     features: [
       "Multi-level menus (press 1, 2, 3…)",
       "Keypad (DTMF) and speech input",
@@ -59,10 +59,10 @@ export const offerings: Offering[] = [
     step: "03",
     stage: "Converse",
     name: "Two-way calling",
-    tagline: "Human-like AI agents that listen, understand and talk back — end to end.",
+    tagline: "Human-like agents that listen, understand and reply.",
     accent: "#6f80e0",
     unique:
-      "Customers can interrupt mid-sentence or switch languages, and the agent adapts in under 500ms — then hands off to a human with full context if needed.",
+      "Handles interruptions and language switches in under 500ms, and hands off to a human when needed.",
     features: [
       "Natural voice in 15+ languages",
       "Answers questions & handles objections",

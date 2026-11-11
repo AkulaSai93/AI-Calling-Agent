@@ -40,7 +40,7 @@ export default function Offerings() {
             Three ways to <span className="text-[#6e6f78]">call</span>
           </h2>
           <p className="mt-4 max-w-[360px] text-base leading-relaxed text-muted">
-            One platform, from simple announcements to full conversations. Pick how deep each call should go, or chain all three in one campaign.
+            From simple announcements to full conversations, on one platform.
           </p>
 
           <ol className="relative mt-10 hidden lg:block">
@@ -84,7 +84,7 @@ export default function Offerings() {
                 ref={(el) => {
                   refs.current[o.id] = el;
                 }}
-                className="scroll-mt-28 py-12 first:pt-0 last:pb-0"
+                className="scroll-mt-28 py-10 first:pt-0 last:pb-0"
               >
                 <div className="flex items-baseline justify-between gap-4">
                   <h3 className="text-[clamp(24px,2.6vw,32px)] leading-tight font-light tracking-[-0.02em]">
@@ -122,7 +122,7 @@ export default function Offerings() {
                     </div>
 
                     <ul className={`mt-7 flex flex-col gap-2.5 ${o.id === "avr" ? "" : "md:mt-0"}`}>
-                      {o.features.map((f) => (
+                      {o.features.slice(0, 3).map((f) => (
                         <li key={f} className="flex items-start gap-3 text-[15px] leading-snug text-body">
                           <span aria-hidden className="mt-[7px] size-1.5 shrink-0 rounded-full" style={{ background: o.accent }} />
                           {f}
@@ -130,11 +130,7 @@ export default function Offerings() {
                       ))}
                     </ul>
 
-                    <p className="mt-7 text-sm text-muted md:col-span-2">
-                      <span className="mr-2 font-mono text-[11px] tracking-[0.2em] text-faint uppercase">Best for</span>
-                      {o.useCases.join(" · ")}
-                    </p>
-                    <p className="mt-5 flex items-baseline gap-2 border-t border-line pt-5 md:col-span-2">
+                    <p className="mt-7 flex items-baseline gap-2 border-t border-line pt-5 md:col-span-2">
                       <span className="text-[32px] leading-none font-light tracking-tight" style={{ color: o.accent }}>
                         {o.stat.value}
                       </span>
