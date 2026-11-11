@@ -62,9 +62,9 @@ export default function Faq() {
       <div className="grid gap-12 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-20">
         {/* Left: heading + contact */}
         <div data-reveal className="self-start lg:sticky lg:top-28">
-          <p className="text-gradient text-sm font-medium tracking-wide">FAQs</p>
-          <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em]">
-            Questions, <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">answered</em>
+          <p className="font-mono text-[11px] tracking-[0.28em] text-muted uppercase">FAQs</p>
+          <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-light tracking-[-0.03em]">
+            Questions, <span className="text-[#6e6f78]">answered</span>
           </h2>
           <p className="mt-4 max-w-[340px] text-base leading-relaxed text-muted">
             Everything you need to know about putting AI on your phone lines.

@@ -153,9 +153,9 @@ export default function CallDemo() {
   return (
     <section ref={sectionRef} id="calls" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
       <div data-reveal className="mx-auto max-w-[640px] text-center">
-        <p className="text-gradient text-sm font-medium tracking-wide">Hear it in action</p>
-        <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
-          Listen to a <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">real</em> call
+        <p className="font-mono text-[11px] tracking-[0.28em] text-muted uppercase">Hear it in action</p>
+        <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-light tracking-[-0.03em] text-balance">
+          Listen to a <span className="text-[#6e6f78]">real</span> call
         </h2>
         <p className="mt-4 text-base leading-relaxed text-balance text-muted sm:text-lg">
           Across industries. Across languages. Pick a use case, switch the language, and hear how {AGENT_NAME} handles it end to end.

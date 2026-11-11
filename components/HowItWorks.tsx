@@ -103,9 +103,9 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
       <div data-reveal className="mx-auto max-w-[640px] text-center">
-        <p className="text-gradient text-sm font-medium tracking-wide">How it works</p>
-        <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
-          Live in <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">minutes</em>, not months
+        <p className="font-mono text-[11px] tracking-[0.28em] text-muted uppercase">How it works</p>
+        <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-light tracking-[-0.03em] text-balance">
+          Live in <span className="text-[#6e6f78]">minutes</span>, not months
         </h2>
         <p className="mt-4 text-base leading-relaxed text-balance text-muted sm:text-lg">
           No code, no call-centre setup. Four steps from your contact list to thousands of human-like conversations.
@@ -155,7 +155,7 @@ export default function HowItWorks() {
                 />
               </span>
 
-              <p className={`font-serif text-[40px] leading-none italic md:mt-6 ${on ? "text-gradient" : "text-white/15"}`}>
+              <p className={`font-mono text-[12px] tracking-[0.28em] md:mt-6 ${on ? "text-brand" : "text-faint"}`}>
                 0{i + 1}
               </p>
               <h3 className={`mt-3 text-xl font-medium tracking-tight transition-colors duration-500 ${on ? "text-fg" : "text-muted"}`}>{s.title}</h3>

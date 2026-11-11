@@ -72,31 +72,32 @@ export default function Navbar() {
       >
         <Logo />
 
-        <nav aria-label="Primary" className="hidden items-center gap-1 rounded-md border border-line bg-white/[0.03] p-1 text-sm lg:flex">
-          {links.map((l) => {
+        <nav aria-label="Primary" className="hidden items-center rounded-md border border-line bg-white/[0.03] p-1 font-mono text-[11px] tracking-[0.2em] uppercase lg:flex">
+          {links.map((l, i) => {
             const on = active === l.href;
             return (
+              <span key={l.label} className="flex items-center">
+                {i > 0 && <span aria-hidden className="px-0.5 text-faint">/</span>}
               <a
-                key={l.label}
                 href={l.href}
                 aria-current={on ? "true" : undefined}
                 className={`relative rounded-[5px] px-3.5 py-1.5 transition-colors ${on ? "bg-white/[0.08] text-fg" : "text-muted hover:text-fg"}`}
               >
                 {l.label}
-                {on && <span aria-hidden className="absolute inset-x-3.5 -bottom-[5px] h-px bg-[linear-gradient(90deg,transparent,#8898e7,transparent)]" />}
               </a>
+              </span>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-2 text-sm">
-          <Link href="#" className="hidden rounded-md px-3 py-2 text-body transition-colors hover:bg-white/[0.06] sm:inline">
+          <Link href="#" className="hidden rounded-md px-3 py-2 font-mono text-[11px] tracking-[0.16em] text-body uppercase transition-colors hover:bg-white/[0.06] sm:inline">
             Log in
           </Link>
           <Link
             href="#demo"
             data-magnetic
-            className="group hidden items-center gap-2 rounded-md bg-fg py-2 pr-3 pl-4 font-medium text-bg shadow-[0_8px_24px_-10px_rgb(136_152_231/0.8)] transition-colors hover:bg-white sm:inline-flex"
+            className="group hidden items-center gap-2 rounded-md bg-fg py-2 pr-3 pl-4 font-mono text-[11px] font-medium tracking-[0.16em] text-bg uppercase shadow-[0_8px_24px_-10px_rgb(136_152_231/0.8)] transition-colors hover:bg-white sm:inline-flex"
           >
             Book a demo
             <span className="grid size-5 place-items-center rounded-[4px] bg-bg text-fg transition-transform group-hover:translate-x-0.5">

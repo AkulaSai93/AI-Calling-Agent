@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import CallDemo from "@/components/CallDemo";
 import LanguageStrip from "@/components/LanguageStrip";
 import Offerings from "@/components/Offerings";
+import Statement from "@/components/Statement";
 import HowItWorks from "@/components/HowItWorks";
 import Benchmarks from "@/components/Benchmarks";
 import Comparison from "@/components/Comparison";
@@ -18,6 +19,7 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <Statement />
         <CallDemo />
         <LanguageStrip />
         <Offerings />

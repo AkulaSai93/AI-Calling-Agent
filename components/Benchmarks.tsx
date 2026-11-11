@@ -51,9 +51,9 @@ export default function Benchmarks() {
     <section id="benchmarks" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
       <div data-reveal className="flex flex-col items-center gap-6 text-center md:flex-row md:items-end md:justify-between md:text-left">
         <div className="max-w-[560px]">
-          <p className="text-gradient text-sm font-medium tracking-wide">Our benchmarks</p>
-          <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
-            Numbers that <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">speak</em> for themselves
+          <p className="font-mono text-[11px] tracking-[0.28em] text-muted uppercase">Our benchmarks</p>
+          <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-light tracking-[-0.03em] text-balance">
+            Numbers that <span className="text-[#6e6f78]">speak</span> for themselves
           </h2>
         </div>
         <p className="max-w-[360px] text-base leading-relaxed text-muted">
@@ -79,7 +79,7 @@ export default function Benchmarks() {
               />
               <dd className="relative flex items-baseline justify-center leading-none tabular-nums sm:justify-start">
                 {s.prefix && <span className="mr-1 text-[clamp(32px,3.6vw,52px)] font-medium text-muted">{s.prefix}</span>}
-                <span className="bg-linear-to-b from-white from-30% to-[#a3a7b8] bg-clip-text text-[clamp(64px,7.4vw,108px)] font-medium tracking-[-0.05em] text-transparent">
+                <span className="text-[clamp(64px,7.4vw,108px)] font-light tracking-[-0.05em] text-fg">
                   {shown}
                 </span>
                 <span className="text-gradient ml-1 text-[clamp(28px,3.2vw,46px)] font-medium tracking-tight">{s.suffix}</span>

@@ -2,7 +2,7 @@ import LeadForm from "./LeadForm";
 import Usps from "./Usps";
 import HeroVoice from "./HeroVoice";
 
-const plain = "bg-linear-to-b from-white from-30% to-[#a3a7b8] bg-clip-text text-transparent";
+const plain = "text-fg";
 
 // Each word sits in its own mask so GSAP can slide it up into view
 function Word({ children, className = plain }: { children: React.ReactNode; className?: string }) {
@@ -30,10 +30,10 @@ export default function Hero() {
         <HeroVoice />
       </div>
 
-      <h1 className="max-w-[980px] text-[clamp(36px,6.2vw,76px)] leading-[1.04] font-medium tracking-[-0.035em] text-balance">
+      <h1 className="max-w-[980px] text-[clamp(36px,6.2vw,76px)] leading-[1.04] font-light tracking-[-0.045em] text-balance">
         <Word>AI</Word> <Word>calling</Word> <Word>agents</Word> <Word>that</Word>
         <br className="hidden sm:block" /> <Word>sound</Word>{" "}
-        <Word className="text-gradient pr-[0.06em] font-serif font-normal tracking-[-0.01em] italic">human</Word> <Word>&amp;</Word> <Word>sell</Word>{" "}
+        <Word className="text-[#6e6f78]">human</Word> <Word>&amp;</Word> <Word>sell</Word>{" "}
         <Word>24/7</Word>
       </h1>
 

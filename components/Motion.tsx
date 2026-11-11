@@ -80,6 +80,16 @@ export default function Motion() {
         );
       });
 
+      // Statement words light up one by one, tied to scroll
+      gsap.utils.toArray<HTMLElement>("[data-scrub-text]").forEach((el) => {
+        gsap.to(el.querySelectorAll("[data-scrub-word]"), {
+          color: "#f2f2f5",
+          stagger: 0.1,
+          ease: "none",
+          scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: 0.5 },
+        });
+      });
+
       gsap.utils.toArray<HTMLElement>("[data-reveal]").forEach((el) => {
         gsap.fromTo(
           el,

@@ -90,82 +90,6 @@ function Wave({ color, live, bars = 22, className = "h-8" }: { color: string; li
   );
 }
 
-function Caller({ name, sub, accent, ring }: { name: string; sub: string; accent: string; ring: boolean }) {
-  return (
-    <div className="flex flex-col items-center pt-6 text-center">
-      <span className="relative grid size-16 place-items-center">
-        {ring && (
-          <>
-            <span className="absolute inset-0 rounded-full border animate-ring" style={{ borderColor: `${accent}99` }} />
-            <span className="absolute inset-0 rounded-full border animate-ring [animation-delay:0.8s]" style={{ borderColor: `${accent}66` }} />
-          </>
-        )}
-        <span
-          className="relative grid size-16 place-items-center rounded-full text-xl font-semibold text-white"
-          style={{ background: `linear-gradient(145deg, ${accent}, #3c4699)` }}
-        >
-          {name[0]}
-        </span>
-      </span>
-      <p className="mt-3 text-[17px] font-medium text-white">{name}</p>
-      <p className="mt-0.5 text-[11px] text-white/60">{sub}</p>
-    </div>
-  );
-}
-
-/* ---------- 01 One-way: incoming call → personalised voice message ---------- */
-
-const message = "Hi Priya, your EMI of ₹4,200 is due on 5 December. Tap the link we sent on WhatsApp to pay in one step.";
-
-export function BroadcastVisual({ accent }: { accent: string }) {
-  const tick = useTick(250);
-  const t = tick % 44; // 0–7 ringing · 8–37 playing · 38–43 delivered
-  const ringing = t < 8;
-  const words = message.split(" ");
-  const shown = ringing ? 0 : Math.min(words.length, Math.ceil(((t - 8) / 26) * words.length));
-  const done = t >= 38;
-
-  return (
-    <Phone accent={accent}>
-      <Caller name="Apex Finance" sub={ringing ? "Incoming call…" : done ? "Call ended · 0:21" : `Voice message · 0:${String(Math.floor((t - 8) / 4) + 3).padStart(2, "0")}`} accent={accent} ring={ringing} />
-
-      <div className="mx-4 mt-6 flex-1">
-        {ringing ? (
-          <p className="text-center text-[11px] text-white/50">Personalised reminder · Hindi / English</p>
-        ) : (
-          <div className="rounded-xl border border-white/10 bg-white/[0.06] p-3 backdrop-blur">
-            <div className="flex items-center justify-between text-[9.5px] text-white/50">
-              <span>Voxa AI · live caption</span>
-              <span className="rounded-sm border border-white/15 px-1">EN</span>
-            </div>
-            <p className="mt-2 min-h-[72px] text-[12px] leading-snug text-white">
-              {words.slice(0, shown).join(" ")}
-              {!done && <span className="ml-0.5 inline-block h-3 w-[2px] translate-y-0.5 animate-pulse bg-white/70" />}
-            </p>
-            <Wave color={accent} live={!done} bars={20} className="mt-2 h-6" />
-          </div>
-        )}
-        {done && <p className="mt-3 text-center text-[11px] text-[#34c759]">✓ Delivered · listened 100%</p>}
-      </div>
-
-      <div className="flex shrink-0 justify-around px-8 pb-10">
-        {ringing ? (
-          <>
-            <RoundButton kind="accept" tone="red" label="Decline" />
-            <RoundButton kind="accept" tone="green" label="Accept" />
-          </>
-        ) : (
-          <>
-            <RoundButton kind="mic" label="Mute" />
-            <RoundButton kind="accept" tone="red" label="End" />
-            <RoundButton kind="speaker" label="Speaker" />
-          </>
-        )}
-      </div>
-    </Phone>
-  );
-}
-
 /* ---------- 02 AVR: in-call keypad, press or say ---------- */
 
 const menu = [
@@ -240,14 +164,101 @@ export function KeypadVisual({ accent }: { accent: string }) {
   );
 }
 
-/* ---------- 03 Two-way: live conversation with Aria ---------- */
+/* ---------- Desktop window shell (used by the non-phone visuals) ---------- */
+
+function Window({ title, accent, children }: { title: string; accent: string; children: React.ReactNode }) {
+  return (
+    <div className="relative">
+      <span aria-hidden className="absolute -inset-8 -z-10 opacity-40 blur-3xl" style={{ background: `radial-gradient(closest-side, ${accent}55, transparent)` }} />
+      <div className="overflow-hidden rounded-lg border border-white/12 bg-[#0a0a0e] shadow-[0_40px_80px_-30px_rgb(0_0_0/0.9)]">
+        <div className="flex items-center gap-3 border-b border-line px-4 py-2.5">
+          <span className="flex gap-1.5" aria-hidden>
+            <span className="size-2.5 rounded-full bg-white/15" />
+            <span className="size-2.5 rounded-full bg-white/15" />
+            <span className="size-2.5 rounded-full bg-white/15" />
+          </span>
+          <span className="font-mono text-[10px] tracking-[0.18em] text-muted uppercase">{title}</span>
+        </div>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ---------- 01 One-way: campaign dashboard ---------- */
+
+const regions = [
+  { name: "Maharashtra", lang: "Marathi", base: 0.92 },
+  { name: "Tamil Nadu", lang: "Tamil", base: 0.84 },
+  { name: "Delhi NCR", lang: "Hindi", base: 0.76 },
+  { name: "Karnataka", lang: "Kannada", base: 0.68 },
+];
+
+export function BroadcastVisual({ accent }: { accent: string }) {
+  const tick = useTick(120);
+  const p = Math.min(1, (tick % 110) / 90); // fill, hold, restart
+  const sent = Math.round(50000 * p);
+  const bars = 28;
+
+  return (
+    <Window title="Campaign · EMI reminders · Dec" accent={accent}>
+      <div className="grid gap-px bg-line sm:grid-cols-3">
+        {[
+          { k: "Calls placed", v: sent.toLocaleString("en-IN") },
+          { k: "Answered", v: `${Math.round(78 * Math.min(1, p * 1.4))}%` },
+          { k: "Listened fully", v: `${Math.round(91 * Math.min(1, p * 1.6))}%` },
+        ].map((m) => (
+          <div key={m.k} className="bg-[#0a0a0e] px-4 py-3">
+            <p className="font-mono text-[9.5px] tracking-[0.18em] text-faint uppercase">{m.k}</p>
+            <p className="mt-1 text-[22px] font-light tracking-tight text-fg tabular-nums">{m.v}</p>
+          </div>
+        ))}
+      </div>
+
+      {/* Calls per minute */}
+      <div className="border-t border-line px-4 pt-4">
+        <p className="font-mono text-[9.5px] tracking-[0.18em] text-faint uppercase">Calls / minute</p>
+        <div className="mt-3 flex h-20 items-end gap-[3px]">
+          {Array.from({ length: bars }, (_, i) => {
+            const h = 30 + 65 * Math.abs(Math.sin(i * 0.45) * Math.cos(i * 0.17));
+            const on = i / bars <= p;
+            return (
+              <span
+                key={i}
+                className="flex-1 rounded-t-[2px] transition-all duration-300"
+                style={{ height: `${on ? h : 6}%`, background: on ? accent : "rgb(255 255 255 / 0.06)", opacity: on ? 0.35 + (i / bars) * 0.65 : 1 }}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Regions, each in its own language */}
+      <ul className="space-y-2.5 border-t border-line px-4 py-4">
+        {regions.map((r) => (
+          <li key={r.name} className="grid grid-cols-[110px_minmax(0,1fr)_40px] items-center gap-3 text-[11.5px]">
+            <span className="truncate text-body">
+              {r.name} <span className="text-faint">· {r.lang}</span>
+            </span>
+            <span className="h-1 overflow-hidden rounded-full bg-white/[0.06]">
+              <span className="block h-full rounded-full transition-[width] duration-300" style={{ width: `${r.base * p * 100}%`, background: accent }} />
+            </span>
+            <span className="text-right text-muted tabular-nums">{Math.round(r.base * p * 100)}%</span>
+          </li>
+        ))}
+      </ul>
+    </Window>
+  );
+}
+
+/* ---------- 03 Two-way: live call console ---------- */
 
 const convo = [
-  { ai: true, text: "Hi Neha, it's Aria from Voxa — got a minute?" },
-  { ai: false, text: "Sure! Can we talk in Hindi?" },
-  { ai: true, text: "बिल्कुल! आपकी टीम कितनी बड़ी है?" },
-  { ai: false, text: "करीब 40 लोग हैं।" },
-  { ai: true, text: "बढ़िया — गुरुवार 4 बजे डेमो बुक कर दिया है।" },
+  { ai: true, text: "Hi Neha, it's Aria from Voxa. Got a minute?", tag: null },
+  { ai: false, text: "Sure! Can we talk in Hindi?", tag: "Language → Hindi" },
+  { ai: true, text: "बिल्कुल! आपकी टीम कितनी बड़ी है?", tag: null },
+  { ai: false, text: "करीब 40 लोग हैं।", tag: "Team size: 40" },
+  { ai: true, text: "बढ़िया, गुरुवार 4 बजे डेमो बुक कर दिया है।", tag: "Demo booked" },
 ];
 
 export function ConversationVisual({ accent }: { accent: string }) {
@@ -255,39 +266,53 @@ export function ConversationVisual({ accent }: { accent: string }) {
   const shown = Math.min((tick % (convo.length + 2)) + 1, convo.length);
   const visible = convo.slice(Math.max(0, shown - 3), shown);
   const last = convo[shown - 1];
-  const hindi = shown >= 3;
+  const tags = convo.slice(0, shown).filter((m) => m.tag);
   const done = shown === convo.length;
+  const intent = [32, 48, 61, 78, 94][shown - 1];
 
   return (
-    <Phone accent={accent}>
-      <Caller name="Aria · Voxa AI" sub={`0:${String(6 + shown * 7).padStart(2, "0")} · ${hindi ? "हिंदी" : "English"}`} accent={accent} ring={last.ai && !done} />
+    <Window title="Live call · Lead qualification" accent={accent}>
+      <div className="grid sm:grid-cols-[minmax(0,1fr)_170px]">
+        {/* Voices + transcript */}
+        <div className="p-4">
+          <div className="grid grid-cols-[52px_minmax(0,1fr)] items-center gap-x-3 gap-y-2">
+            <span className="font-mono text-[9.5px] tracking-[0.16em] uppercase" style={{ color: accent }}>Aria</span>
+            <Wave color={accent} live={last.ai && !done} bars={36} className="h-7 justify-start" />
+            <span className="font-mono text-[9.5px] tracking-[0.16em] text-muted uppercase">Neha</span>
+            <Wave color="rgb(255 255 255 / 0.7)" live={!last.ai && !done} bars={36} className="h-7 justify-start" />
+          </div>
 
-      <div className="mx-3 mt-4 flex flex-1 flex-col justify-end gap-1.5 overflow-hidden">
-        {visible.map((m) => (
-          <p
-            key={m.text}
-            lang={/[ऀ-ॿ]/.test(m.text) ? "hi" : "en"}
-            className={`max-w-[88%] animate-rise rounded-2xl px-3 py-1.5 text-[11.5px] leading-snug ${m.ai ? "self-start rounded-bl-sm text-white" : "self-end rounded-br-sm bg-white/[0.12] text-white/90"}`}
-            style={m.ai ? { background: `${accent}38` } : undefined}
-          >
-            {m.text}
-          </p>
-        ))}
-      </div>
+          <div className="mt-4 flex h-[118px] flex-col justify-end gap-1.5 overflow-hidden border-t border-line pt-3">
+            {visible.map((m) => (
+              <p key={m.text} lang={/[ऀ-ॿ]/.test(m.text) ? "hi" : "en"} className="animate-rise text-[12px] leading-snug">
+                <span className="mr-2 font-mono text-[9.5px] tracking-[0.14em] uppercase" style={{ color: m.ai ? accent : "var(--color-faint)" }}>
+                  {m.ai ? "Aria" : "Neha"}
+                </span>
+                <span className={m.ai ? "text-fg" : "text-body"}>{m.text}</span>
+              </p>
+            ))}
+          </div>
+        </div>
 
-      <div className="shrink-0 px-6 pt-3">
-        <Wave color={last.ai ? accent : "rgb(255 255 255 / 0.7)"} live={!done} bars={24} className="h-7" />
-        <p className="mt-1 text-center text-[10px]" style={{ color: done ? "#34c759" : "rgb(255 255 255 / 0.5)" }}>
-          {done ? "✓ Demo booked · synced to CRM" : last.ai ? "Aria is speaking" : "Neha is speaking"}
-        </p>
-      </div>
+        {/* Live insights */}
+        <div className="border-t border-line p-4 sm:border-t-0 sm:border-l">
+          <p className="font-mono text-[9.5px] tracking-[0.18em] text-faint uppercase">Buying intent</p>
+          <p className="mt-1 text-[24px] font-light text-fg tabular-nums">{intent}%</p>
+          <span className="mt-2 block h-1 overflow-hidden rounded-full bg-white/[0.06]">
+            <span className="block h-full rounded-full transition-[width] duration-700" style={{ width: `${intent}%`, background: accent }} />
+          </span>
 
-      <div className="flex shrink-0 justify-around px-6 pt-3 pb-9">
-        <RoundButton kind="mic" />
-        <RoundButton kind="keypad" />
-        <RoundButton kind="speaker" />
-        <RoundButton kind="accept" tone="red" />
+          <p className="mt-5 font-mono text-[9.5px] tracking-[0.18em] text-faint uppercase">Captured</p>
+          <ul className="mt-2 space-y-1.5">
+            {tags.map((m) => (
+              <li key={m.tag} className={`animate-rise text-[11px] ${m.tag === "Demo booked" ? "text-live" : "text-body"}`}>
+                ✓ {m.tag}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-[10px] text-faint">{done ? "Synced to CRM" : "Response time 320 ms"}</p>
+        </div>
       </div>
-    </Phone>
+    </Window>
   );
 }

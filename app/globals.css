@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-inter), var(--font-devanagari), var(--font-tamil), var(--font-telugu), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-instrument-serif), Georgia, serif;
+  --font-sans: var(--font-outfit), var(--font-devanagari), var(--font-tamil), var(--font-telugu), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   /* Dark theme */
   --color-bg: #000000;
@@ -53,11 +53,9 @@
   }
 }
 
+/* Accent text: solid brand blue (no gradient) */
 @utility text-gradient {
-  background-image: linear-gradient(90deg, var(--color-brand-light) 0%, var(--color-brand) 34%, var(--color-brand-deep) 67%, var(--color-brand-deeper) 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--color-brand);
 }
 
 /* Deeper version of the brand gradient for buttons with white text */
