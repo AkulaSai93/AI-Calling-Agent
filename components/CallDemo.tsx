@@ -162,7 +162,7 @@ export default function CallDemo() {
 
   return (
     <section ref={sectionRef} id="calls" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
-      <div className="mx-auto max-w-[640px] text-center">
+      <div data-reveal className="mx-auto max-w-[640px] text-center">
         <p className="text-gradient text-sm font-medium tracking-wide">Hear it in action</p>
         <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
           Listen to a <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">real</em> call
@@ -172,7 +172,7 @@ export default function CallDemo() {
         </p>
       </div>
 
-      <div className="mt-12 overflow-hidden rounded-lg border border-line bg-white/[0.025] shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)] backdrop-blur-md">
+      <div data-zoom className="mt-12 overflow-hidden rounded-lg border border-line bg-white/[0.025] shadow-[0_40px_120px_-40px_rgb(0_0_0/0.9)] backdrop-blur-md">
         <div className="grid grid-cols-[minmax(0,1fr)] lg:grid-cols-[230px_minmax(0,1fr)_minmax(0,1.3fr)]">
           {/* Use cases + language */}
           <div className="border-b border-line p-4 sm:p-5 lg:border-r lg:border-b-0">
@@ -290,6 +290,7 @@ export default function CallDemo() {
             </p>
 
             <button
+              data-magnetic
               onClick={togglePlay}
               className="relative mt-5 inline-flex items-center gap-2 rounded-md bg-gradient-deep py-2.5 pr-5 pl-4 text-sm font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-transform hover:scale-[1.03]"
             >
@@ -328,7 +329,7 @@ export default function CallDemo() {
               </span>
             </div>
 
-            <div ref={transcriptRef} className="relative h-[360px] overflow-y-auto px-4 py-6 [scrollbar-width:thin] sm:h-[440px] sm:px-6">
+            <div ref={transcriptRef} data-lenis-prevent className="relative h-[360px] overflow-y-auto px-4 py-6 [scrollbar-width:thin] sm:h-[440px] sm:px-6">
               <ol className="flex flex-col gap-4" lang={lang}>
                 {lines.map((line, i) => {
                   const isAgent = line.from === "agent";

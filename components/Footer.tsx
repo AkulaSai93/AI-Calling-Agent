@@ -43,7 +43,7 @@ const columns = [
 export default function Footer() {
   return (
     <footer className="mt-10 px-3 pb-3 sm:px-4 sm:pb-4">
-      <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-lg border border-line bg-[#0b0b0d]">
+      <div data-reveal className="relative mx-auto max-w-[1400px] overflow-hidden rounded-lg border border-line bg-[#0b0b0d]">
         <div className="px-6 pt-14 sm:px-12 sm:pt-16">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)]">
             {/* Brand */}
@@ -98,7 +98,7 @@ export default function Footer() {
 
         {/* Giant wordmark, fading out at both edges */}
         {/* Giant wordmark stretched edge to edge, fading out at both ends */}
-        <svg aria-hidden viewBox="0 0 1000 206" className="mt-8 block w-full select-none">
+        <svg aria-hidden data-parallax="-18" viewBox="0 0 1000 206" className="mt-8 block w-full select-none">
           <defs>
             <linearGradient id="footer-wordmark" x1="0" x2="1" y1="0" y2="0">
               <stop offset="0" stopColor="#5566d4" stopOpacity="0.08" />

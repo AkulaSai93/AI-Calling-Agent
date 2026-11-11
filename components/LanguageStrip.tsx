@@ -3,14 +3,14 @@ import { spokenLanguages } from "@/data/demoCalls";
 export default function LanguageStrip() {
   return (
     <section aria-labelledby="languages-title" className="mx-auto max-w-[1200px] px-4 pb-24 sm:px-6">
-      <div className="text-center">
+      <div data-reveal className="text-center">
         <h3 id="languages-title" className="text-xl font-medium tracking-tight sm:text-2xl">
           Reach every customer, <span className="text-gradient">in their language</span>
         </h3>
         <p className="mt-2 text-sm text-muted">Native accents, natural code-switching between English and regional languages.</p>
       </div>
 
-      <ul className="mt-10 grid grid-cols-5 border-y border-line lg:grid-cols-10">
+      <ul data-stagger className="mt-10 grid grid-cols-5 border-y border-line lg:grid-cols-10">
         {spokenLanguages.map((l, i) => (
           <li
             key={l.name}

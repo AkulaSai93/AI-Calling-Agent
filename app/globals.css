@@ -74,6 +74,16 @@
   }
 }
 
+/* Hidden until GSAP takes over (see components/Motion.tsx); removed by script fallback too */
+html.motion-pending header,
+html.motion-pending [data-hero-voice],
+html.motion-pending [data-word],
+html.motion-pending [data-hero-rest],
+html.motion-pending [data-reveal],
+html.motion-pending [data-stagger] > * {
+  visibility: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

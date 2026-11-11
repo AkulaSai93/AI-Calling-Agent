@@ -12,150 +12,202 @@ function useTick(ms: number) {
   return tick;
 }
 
-/* 01 — one source broadcasting to many phones */
-export function BroadcastVisual({ accent }: { accent: string }) {
-  const phones = 10;
-  const tick = useTick(260);
-  const delivered = tick % (phones + 4); // light phones one by one, hold, then restart
-
+/* Shared frame so all three mock-ups look like one product */
+function Frame({ title, meta, accent, children }: { title: string; meta: React.ReactNode; accent: string; children: React.ReactNode }) {
   return (
-    <div className="relative grid size-full place-items-center pb-4">
-      {[0, 0.55, 1.1].map((d) => (
-        <span
-          key={d}
-          className="absolute size-16 rounded-full border animate-ring"
-          style={{ borderColor: `${accent}66`, animationDelay: `${d}s`, animationDuration: "2s" }}
-        />
-      ))}
-      <span
-        className="relative z-10 grid size-14 place-items-center rounded-full text-white"
-        style={{ background: `radial-gradient(circle at 30% 25%, ${accent}, #3b3270)`, boxShadow: `0 0 40px -6px ${accent}` }}
-      >
-        <svg viewBox="0 0 24 24" className="size-6 fill-none stroke-current stroke-2 [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden>
-          <path d="M3 11v2a1 1 0 0 0 1 1h3l5 4V6L7 10H4a1 1 0 0 0-1 1z" />
-          <path d="M16 9a4 4 0 0 1 0 6M19 6.5a8 8 0 0 1 0 11" />
-        </svg>
-      </span>
-      {Array.from({ length: phones }, (_, i) => {
-        const angle = (i / phones) * Math.PI * 2 - Math.PI / 2;
-        const on = i < delivered;
-        return (
-          <span
-            key={i}
-            className="absolute grid size-7 place-items-center rounded-lg border transition-all duration-300"
-            style={{
-              left: `calc(50% + ${Math.cos(angle) * 42}% - 14px)`,
-              top: `calc(50% + ${Math.sin(angle) * 34}% - 22px)`,
-              borderColor: on ? `${accent}99` : "rgb(255 255 255 / 0.1)",
-              background: on ? `${accent}26` : "rgb(255 255 255 / 0.03)",
-              color: on ? accent : "#6b6679",
-            }}
-          >
-            {on ? (
-              <svg viewBox="0 0 24 24" className="size-3.5 fill-none stroke-current stroke-[2.6] [stroke-linecap:round] [stroke-linejoin:round]" aria-hidden>
-                <path d="m5 12 5 5 9-10" />
-              </svg>
-            ) : (
-              <svg viewBox="0 0 24 24" className="size-3.5 fill-none stroke-current stroke-2" aria-hidden>
-                <rect x="7" y="3" width="10" height="18" rx="2" />
-              </svg>
-            )}
-          </span>
-        );
-      })}
-      <span className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-md border border-line bg-bg/80 px-2.5 py-1 text-[11px] whitespace-nowrap text-muted tabular-nums">
-        {(Math.min(delivered, phones) * 1248).toLocaleString("en-IN")} delivered
-      </span>
+    <div className="flex h-full flex-col overflow-hidden rounded-lg border border-line bg-[#0b0b0f] text-left shadow-[0_30px_80px_-40px_rgb(0_0_0/0.9)]">
+      <div className="flex items-center justify-between border-b border-line px-4 py-2.5">
+        <span className="flex items-center gap-2 text-[12px] font-medium text-fg">
+          <span className="size-1.5 rounded-full animate-ping-soft" style={{ background: accent }} />
+          {title}
+        </span>
+        <span className="text-[11px] text-faint tabular-nums">{meta}</span>
+      </div>
+      <div className="relative flex-1 p-4">{children}</div>
     </div>
   );
 }
 
-/* 02 — keypad cycling through press 1 / 2 / 3 */
-const menu = [
-  { key: "1", text: "Confirm order" },
-  { key: "2", text: "Reschedule delivery" },
-  { key: "3", text: "Talk to an agent" },
-];
-const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
+function MiniWave({ color, live = true }: { color: string; live?: boolean }) {
+  return (
+    <span aria-hidden className="flex h-3.5 items-center gap-[2px]">
+      {[50, 90, 60, 100, 70, 40].map((h, i) => (
+        <span
+          key={i}
+          className={`w-[2px] rounded-full ${live ? "animate-wave" : ""}`}
+          style={{ height: `${live ? h : 30}%`, background: color, animationDelay: `${-i * 0.13}s` }}
+        />
+      ))}
+    </span>
+  );
+}
 
-export function KeypadVisual({ accent }: { accent: string }) {
-  const tick = useTick(1500);
-  const active = menu[tick % menu.length];
+/* 01 — personalised broadcast: each contact gets their own message */
+const contacts = [
+  { name: "Priya S.", lang: "HI", msg: "EMI of ₹4,200 due on 5 Dec" },
+  { name: "Arjun K.", lang: "TA", msg: "Order #48213 arrives today" },
+  { name: "Meera R.", lang: "EN", msg: "Policy renews on 12 Dec" },
+  { name: "Rahul P.", lang: "TE", msg: "Appointment Thu, 6:30 PM" },
+];
+
+export function BroadcastVisual({ accent }: { accent: string }) {
+  const tick = useTick(900);
+  const step = tick % (contacts.length * 2 + 3); // each row: calling → delivered, then hold
+  const sent = 12480 + Math.min(step, contacts.length * 2) * 312;
 
   return (
-    <div className="flex size-full items-center justify-center gap-5">
-      <div className="grid grid-cols-3 gap-1.5">
-        {keys.map((k) => {
-          const on = k === active.key;
-          return (
-            <span
-              key={k}
-              className={`grid size-9 place-items-center rounded-full border text-sm tabular-nums transition-all duration-300 ${on ? "scale-110 text-white" : "text-faint"}`}
-              style={{
-                borderColor: on ? accent : "rgb(255 255 255 / 0.08)",
-                background: on ? `${accent}33` : "rgb(255 255 255 / 0.03)",
-                boxShadow: on ? `0 0 24px -4px ${accent}` : undefined,
-              }}
-            >
-              {k}
-            </span>
-          );
-        })}
+    <Frame title="EMI reminders · campaign" meta={`${sent.toLocaleString("en-IN")} / 50,000`} accent={accent}>
+      <div className="h-1 overflow-hidden rounded-full bg-white/[0.06]">
+        <div className="h-full rounded-full transition-[width] duration-700" style={{ width: `${(sent / 50000) * 100}%`, background: accent }} />
       </div>
-      <ul className="flex w-[148px] flex-col gap-1.5 text-left">
-        {menu.map((m) => {
-          const on = m.key === active.key;
+      <ul className="mt-3 divide-y divide-line">
+        {contacts.map((c, i) => {
+          const state = step < i * 2 ? "queued" : step === i * 2 ? "calling" : "delivered";
           return (
-            <li
-              key={m.key}
-              className={`rounded-md border px-2.5 py-2 text-[12px] leading-tight transition-all duration-300 ${on ? "text-fg" : "text-faint"}`}
-              style={{ borderColor: on ? `${accent}80` : "rgb(255 255 255 / 0.06)", background: on ? `${accent}1a` : "transparent" }}
-            >
-              <span className="font-medium" style={{ color: on ? accent : undefined }}>
-                Press {m.key}
+            <li key={c.name} className="flex items-center gap-3 py-2">
+              <span className="grid size-7 shrink-0 place-items-center rounded-full bg-white/[0.06] text-[11px] text-body">{c.name[0]}</span>
+              <span className="min-w-0 flex-1">
+                <span className="flex items-center gap-1.5 text-[12px] text-fg">
+                  {c.name}
+                  <span className="rounded-sm border border-line px-1 text-[9px] text-muted">{c.lang}</span>
+                </span>
+                <span className="block truncate text-[11.5px] text-muted">“Hi {c.name.split(" ")[0]}, {c.msg}”</span>
               </span>
-              <br />
-              {m.text}
+              <span className="flex w-[74px] shrink-0 justify-end text-[11px]">
+                {state === "calling" ? (
+                  <span className="flex items-center gap-1.5" style={{ color: accent }}>
+                    <MiniWave color={accent} /> Calling
+                  </span>
+                ) : state === "delivered" ? (
+                  <span className="text-live">✓ Delivered</span>
+                ) : (
+                  <span className="text-faint">Queued</span>
+                )}
+              </span>
             </li>
           );
         })}
       </ul>
-    </div>
+    </Frame>
   );
 }
 
-/* 03 — back-and-forth conversation, switching language mid-call */
+/* 02 — AVR: prompt, keypad and the result syncing to CRM */
+const menu = [
+  { key: "1", text: "Confirm order", result: "Order #4821 confirmed", spoken: false },
+  { key: "2", text: "Reschedule delivery", result: "Moved to Sat, 10 AM", spoken: true },
+  { key: "3", text: "Talk to an agent", result: "Routed to support team", spoken: false },
+];
+const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "0", "#"];
+
+export function KeypadVisual({ accent }: { accent: string }) {
+  const tick = useTick(1800);
+  const active = menu[tick % menu.length];
+
+  return (
+    <Frame title="COD confirmation · AVR" meta="00:14" accent={accent}>
+      <div className="grid h-full grid-cols-[auto_minmax(0,1fr)] gap-4">
+        <div className="grid grid-cols-3 content-center gap-1.5">
+          {keys.map((k) => {
+            const on = k === active.key && !active.spoken;
+            return (
+              <span
+                key={k}
+                className={`grid size-8 place-items-center rounded-md border text-[13px] tabular-nums transition-all duration-300 ${on ? "scale-105 text-white" : "text-faint"}`}
+                style={{
+                  borderColor: on ? accent : "rgb(255 255 255 / 0.08)",
+                  background: on ? `${accent}40` : "rgb(255 255 255 / 0.02)",
+                  boxShadow: on ? `0 0 20px -4px ${accent}` : undefined,
+                }}
+              >
+                {k}
+              </span>
+            );
+          })}
+        </div>
+
+        <div className="flex min-w-0 flex-col justify-center gap-1.5">
+          <p className="mb-1 text-[11px] text-faint">“Press or say an option”</p>
+          {menu.map((m) => {
+            const on = m.key === active.key;
+            return (
+              <div
+                key={m.key}
+                className="flex items-center gap-2 rounded-md border px-2.5 py-1.5 text-[12px] transition-all duration-300"
+                style={{ borderColor: on ? `${accent}80` : "rgb(255 255 255 / 0.06)", background: on ? `${accent}14` : "transparent" }}
+              >
+                <span className="w-3 tabular-nums" style={{ color: on ? accent : "var(--color-faint)" }}>
+                  {m.key}
+                </span>
+                <span className={`truncate ${on ? "text-fg" : "text-faint"}`}>{m.text}</span>
+                {on && m.spoken && (
+                  <span className="ml-auto flex shrink-0 items-center gap-1 text-[10px]" style={{ color: accent }}>
+                    <MiniWave color={accent} /> said
+                  </span>
+                )}
+              </div>
+            );
+          })}
+          <p key={active.key} className="mt-1.5 flex animate-rise items-center gap-1.5 truncate text-[11px] text-live">
+            ✓ {active.result} <span className="text-faint">· synced to CRM</span>
+          </p>
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* 03 — live two-way call that switches language mid-call */
 const convo = [
-  { ai: true, text: "Hi Neha, calling about your demo request — got a minute?" },
+  { ai: true, text: "Hi Neha, it's Aria from Voxa — got a minute?" },
   { ai: false, text: "Sure! Can we talk in Hindi?" },
   { ai: true, text: "बिल्कुल! आपकी टीम कितनी बड़ी है?" },
   { ai: false, text: "करीब 40 लोग हैं।" },
-  { ai: true, text: "Perfect — I've booked you for Thursday, 4 PM." },
+  { ai: true, text: "बढ़िया — गुरुवार 4 बजे डेमो बुक कर दिया है।" },
 ];
 
 export function ConversationVisual({ accent }: { accent: string }) {
-  const tick = useTick(1700);
-  const count = (tick % (convo.length + 2)) + 1; // reveal, hold, restart
-  const visible = convo.slice(0, Math.min(count, convo.length)).slice(-3);
-  const typing = count < convo.length;
+  const tick = useTick(1600);
+  const count = (tick % (convo.length + 2)) + 1;
+  const shown = Math.min(count, convo.length);
+  const visible = convo.slice(Math.max(0, shown - 3), shown);
+  const hindi = shown >= 3;
+  const last = convo[shown - 1];
 
   return (
-    <div className="flex size-full flex-col justify-end gap-2 px-1">
-      {visible.map((m) => (
-        <p
-          key={m.text}
-          className={`max-w-[85%] animate-rise rounded-lg px-3 py-2 text-[12.5px] leading-snug ${m.ai ? "self-start rounded-bl-sm text-fg" : "self-end rounded-br-sm bg-white/[0.06] text-[#d4d5dd]"}`}
-          style={m.ai ? { background: `${accent}22`, border: `1px solid ${accent}55` } : undefined}
-          lang={/[ऀ-ॿ]/.test(m.text) ? "hi" : "en"}
-        >
-          {m.text}
-        </p>
-      ))}
-      <span className={`flex h-4 items-center gap-1 self-start pl-1 transition-opacity ${typing ? "opacity-100" : "opacity-0"}`} aria-hidden>
-        {[0, 0.15, 0.3].map((d) => (
-          <span key={d} className="size-1.5 rounded-full animate-wave" style={{ background: accent, animationDelay: `${d}s` }} />
+    <Frame title="Lead qualification · live" meta={`00:${String(8 + shown * 6).padStart(2, "0")}`} accent={accent}>
+      <div className="flex items-center justify-between">
+        <span className="flex items-center gap-2 text-[11px] text-muted">
+          <MiniWave color={last.ai ? accent : "#d4d5dd"} />
+          {last.ai ? "Aria speaking" : "Neha speaking"}
+        </span>
+        <span className="flex items-center gap-1 rounded-sm border border-line px-1.5 py-0.5 text-[10px] text-muted">
+          <span className={hindi ? "text-faint line-through" : "text-fg"}>EN</span>→
+          <span style={{ color: hindi ? accent : undefined }} className={hindi ? "" : "text-faint"}>
+            HI
+          </span>
+        </span>
+      </div>
+
+      <div className="mt-3 flex h-[118px] flex-col justify-end gap-2">
+        {visible.map((m) => (
+          <p
+            key={m.text}
+            lang={/[ऀ-ॿ]/.test(m.text) ? "hi" : "en"}
+            className={`max-w-[85%] animate-rise rounded-md px-3 py-1.5 text-[12px] leading-snug ${
+              m.ai ? "self-start text-fg" : "self-end bg-white/[0.06] text-body"
+            }`}
+            style={m.ai ? { background: `${accent}1f`, border: `1px solid ${accent}55` } : undefined}
+          >
+            {m.text}
+          </p>
         ))}
-      </span>
-    </div>
+      </div>
+
+      <p className="mt-3 flex items-center justify-between gap-2 border-t border-line pt-2.5 text-[10.5px] text-faint">
+        <span className="truncate">Language switched · adapted in 320 ms</span>
+        <span className={`shrink-0 ${shown === convo.length ? "text-live" : ""}`}>{shown === convo.length ? "✓ Demo booked" : "Qualifying…"}</span>
+      </p>
+    </Frame>
   );
 }

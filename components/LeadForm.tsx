@@ -84,6 +84,7 @@ export default function LeadForm() {
 
         <button
           type="submit"
+          data-magnetic
           disabled={status === "submitting"}
           className="group inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-md bg-gradient-deep bg-size-[160%_100%] bg-left px-[22px] text-[15px] font-medium text-white shadow-[inset_0_0_0_1px_rgb(255_255_255/0.16),0_10px_30px_-10px_rgb(111_128_224/0.8)] transition-[transform,box-shadow,background-position,opacity] duration-500 hover:-translate-y-px hover:bg-right disabled:cursor-progress disabled:opacity-70 sm:col-span-2 lg:col-span-1"
         >

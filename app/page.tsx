@@ -9,6 +9,7 @@ import Benchmarks from "@/components/Benchmarks";
 import Comparison from "@/components/Comparison";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
+import Motion from "@/components/Motion";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
         <Faq />
       </main>
       <Footer />
+      <Motion />
     </>
   );
 }

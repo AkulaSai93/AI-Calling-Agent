@@ -44,7 +44,7 @@ export default function Navbar() {
           <Link href="#" className="hidden rounded-md px-4 py-2 text-body transition-colors hover:bg-white/[0.06] sm:inline">
             Log in
           </Link>
-          <Link href="#demo" className="rounded-md bg-fg px-4 py-2 font-medium text-bg transition-colors hover:bg-white">
+          <Link href="#demo" data-magnetic className="rounded-md bg-fg px-4 py-2 font-medium text-bg transition-colors hover:bg-white">
             Book a demo
           </Link>
         </div>

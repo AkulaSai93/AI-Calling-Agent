@@ -23,7 +23,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable} ${devanagari.variable} ${tamil.variable} ${telugu.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${instrumentSerif.variable} ${devanagari.variable} ${tamil.variable} ${telugu.variable}`}>
+      <head>
+        {/* Hide animated elements before first paint; failsafe reveals them if JS never runs */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "if(!matchMedia('(prefers-reduced-motion: reduce)').matches){var d=document.documentElement;d.classList.add('motion-pending');setTimeout(function(){d.classList.remove('motion-pending')},2500)}",
+          }}
+        />
+      </head>
       <body>{children}</body>
     </html>
   );

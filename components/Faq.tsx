@@ -61,7 +61,7 @@ export default function Faq() {
 
       <div className="grid gap-12 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-20">
         {/* Left: heading + contact */}
-        <div className="self-start lg:sticky lg:top-28">
+        <div data-reveal className="self-start lg:sticky lg:top-28">
           <p className="text-gradient text-sm font-medium tracking-wide">FAQs</p>
           <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em]">
             Questions, <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">answered</em>
@@ -74,7 +74,7 @@ export default function Faq() {
             <p className="text-[15px] font-medium">Still have questions?</p>
             <p className="mt-1.5 text-sm leading-relaxed text-muted">Our team usually replies within a few hours.</p>
             <div className="mt-5 flex items-center gap-3">
-              <a href="#demo" className="rounded-md bg-fg px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-white">
+              <a href="#demo" data-magnetic className="rounded-md bg-fg px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-white">
                 Talk to us
               </a>
               <a href="mailto:hello@voxa.ai" className="text-sm text-muted transition-colors hover:text-fg">
@@ -85,7 +85,7 @@ export default function Faq() {
         </div>
 
         {/* Right: accordion */}
-        <ul className="border-b border-line">
+        <ul data-stagger className="border-b border-line">
           {faqs.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -136,7 +136,7 @@ export default function Faq() {
           <p className="text-[15px] font-medium">Still have questions?</p>
           <p className="mt-1.5 text-sm leading-relaxed text-muted">Our team usually replies within a few hours.</p>
           <div className="mt-5 flex items-center gap-3">
-            <a href="#demo" className="rounded-md bg-fg px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-white">
+            <a href="#demo" data-magnetic className="rounded-md bg-fg px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-white">
               Talk to us
             </a>
             <a href="mailto:hello@voxa.ai" className="text-sm text-muted transition-colors hover:text-fg">

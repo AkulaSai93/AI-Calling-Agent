@@ -31,7 +31,7 @@ function Wave({ side }: { side: 0 | 1 }) {
 
 export default function HeroVoice() {
   return (
-    <div aria-hidden className="flex w-full max-w-[920px] items-center gap-4 sm:gap-6">
+    <div aria-hidden data-scrub-out className="flex w-full max-w-[920px] items-center gap-4 sm:gap-6">
       <Wave side={0} />
 
       <div className="relative grid size-20 shrink-0 place-items-center sm:size-24">

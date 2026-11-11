@@ -34,7 +34,7 @@ export default function Offerings() {
     <section id="offerings" className="mx-auto max-w-[1200px] px-4 pt-8 pb-20 sm:px-6 sm:pt-12 sm:pb-28">
       <div className="grid gap-12 lg:grid-cols-[minmax(0,380px)_minmax(0,1fr)] lg:gap-20">
         {/* Left: sticky heading + progress nav */}
-        <div className="self-start lg:sticky lg:top-28">
+        <div data-reveal className="self-start lg:sticky lg:top-28">
           <p className="text-gradient text-sm font-medium tracking-wide">What we offer</p>
           <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em]">
             Three ways to <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">call</em>
@@ -78,6 +78,7 @@ export default function Offerings() {
             const Visual = visuals[o.id];
             return (
               <article
+                data-reveal
                 key={o.id}
                 id={o.id}
                 ref={(el) => {
@@ -98,14 +99,14 @@ export default function Offerings() {
                 </div>
                 <p className="mt-2 max-w-[560px] text-base leading-relaxed text-muted">{o.tagline}</p>
 
-                {/* Animated visual (glow only, no box) */}
-                <div className="relative mt-6 h-[220px] sm:h-[240px]">
+                {/* Animated product mock-up */}
+                <div data-parallax="-8" className="relative mt-6">
                   <div
                     aria-hidden
                     className="pointer-events-none absolute inset-0"
                     style={{ background: `radial-gradient(50% 60% at 50% 50%, ${o.accent}22, transparent 70%)` }}
                   />
-                  <div className="relative mx-auto size-full max-w-[420px]">
+                  <div className="relative mx-auto size-full max-w-[520px]">
                     <Visual accent={o.accent} />
                   </div>
                 </div>

@@ -102,7 +102,7 @@ export default function HowItWorks() {
 
   return (
     <section id="how-it-works" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
-      <div className="mx-auto max-w-[640px] text-center">
+      <div data-reveal className="mx-auto max-w-[640px] text-center">
         <p className="text-gradient text-sm font-medium tracking-wide">How it works</p>
         <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
           Live in <em className="text-gradient pr-[0.06em] font-serif font-normal tracking-normal">minutes</em>, not months
@@ -113,6 +113,7 @@ export default function HowItWorks() {
       </div>
 
       <ol
+        data-stagger
         className="relative mt-16 grid gap-10 md:mt-20 md:grid-cols-4 md:gap-8"
         onMouseLeave={() => setPaused(false)}
       >
@@ -173,6 +174,7 @@ export default function HowItWorks() {
           Average setup time: <span className="text-fg">15 minutes</span>
         </p>
         <a
+          data-magnetic
           href="#demo"
           className="group inline-flex items-center gap-2 rounded-md bg-fg px-5 py-2.5 text-sm font-medium text-bg transition-colors hover:bg-white"
         >

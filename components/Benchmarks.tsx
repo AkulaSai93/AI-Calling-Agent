@@ -49,7 +49,7 @@ export default function Benchmarks() {
 
   return (
     <section id="benchmarks" className="mx-auto max-w-[1200px] px-4 py-20 sm:px-6 sm:py-28">
-      <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-end md:justify-between md:text-left">
+      <div data-reveal className="flex flex-col items-center gap-6 text-center md:flex-row md:items-end md:justify-between md:text-left">
         <div className="max-w-[560px]">
           <p className="text-gradient text-sm font-medium tracking-wide">Our benchmarks</p>
           <h2 className="mt-3 text-[clamp(30px,4.4vw,52px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
@@ -61,7 +61,7 @@ export default function Benchmarks() {
         </p>
       </div>
 
-      <dl ref={ref} className="mt-14 grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:grid-cols-3">
+      <dl ref={ref} data-stagger className="mt-14 grid grid-cols-1 border-t border-line sm:grid-cols-2 lg:grid-cols-3">
         {stats.map((s, i) => {
           const shown = (s.value * progress).toFixed(s.decimals);
           return (
