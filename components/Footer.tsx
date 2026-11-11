@@ -14,9 +14,9 @@ const columns = [
   {
     title: "Product",
     links: [
-      { label: "One-way calling", href: "#one-way" },
-      { label: "AVR calling", href: "#avr" },
-      { label: "Two-way calling", href: "#two-way" },
+      { label: "One-way calling", href: "#offerings" },
+      { label: "AVR calling", href: "#offerings" },
+      { label: "Two-way calling", href: "#offerings" },
       { label: "Pricing", href: "#" },
     ],
   },

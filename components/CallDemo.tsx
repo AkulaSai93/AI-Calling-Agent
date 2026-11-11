@@ -59,8 +59,6 @@ export default function CallDemo() {
   const [t, setT] = useState(0);
 
   const sectionRef = useRef<HTMLElement>(null);
-  const transcriptRef = useRef<HTMLDivElement>(null);
-  const lineRefs = useRef<(HTMLLIElement | null)[]>([]);
   const audioRef = useRef<HTMLAudioElement>(null);
   const autoStarted = useRef(false);
 
@@ -99,14 +97,6 @@ export default function CallDemo() {
   useEffect(() => {
     if (playing && t >= total) setPlaying(false);
   }, [t, total, playing]);
-
-  // Keep the line being spoken in view inside the transcript (not the page)
-  useEffect(() => {
-    const box = transcriptRef.current;
-    const el = lineRefs.current[lastLitIdx];
-    if (!box || !el || !started) return;
-    box.scrollTo({ top: Math.max(0, el.offsetTop - box.clientHeight / 2 + el.clientHeight / 2), behavior: "smooth" });
-  }, [lastLitIdx, started]);
 
   // Start the first call automatically the first time the section is on screen
   useEffect(() => {
@@ -329,9 +319,11 @@ export default function CallDemo() {
               </span>
             </div>
 
-            <div ref={transcriptRef} data-lenis-prevent className="relative h-[360px] overflow-y-auto px-4 py-6 [scrollbar-width:thin] sm:h-[440px] sm:px-6">
+            {/* No scrolling: spoken lines stack from the bottom, older ones fade out at the top */}
+            <div className="relative flex h-[360px] flex-col justify-end overflow-hidden px-4 py-6 [mask-image:linear-gradient(180deg,transparent,#000_22%)] sm:h-[440px] sm:px-6">
               <ol className="flex flex-col gap-4" lang={lang}>
                 {lines.map((line, i) => {
+                  if (i > Math.max(lastLitIdx, 0)) return null;
                   const isAgent = line.from === "agent";
                   const lit = !started || t >= starts[i];
                   const active = i === activeIdx;
@@ -342,10 +334,7 @@ export default function CallDemo() {
                   return (
                     <li
                       key={`${call.id}-${lang}-${i}`}
-                      ref={(el) => {
-                        lineRefs.current[i] = el;
-                      }}
-                      className={`flex transition-opacity duration-500 ${isAgent ? "" : "justify-end"} ${lit ? "opacity-100" : "opacity-30"}`}
+                      className={`flex animate-rise transition-opacity duration-500 ${isAgent ? "" : "justify-end"} ${lit ? "opacity-100" : "opacity-30"}`}
                     >
                       <div className={`flex max-w-[86%] flex-col ${isAgent ? "items-start" : "items-end"}`}>
                         <span className="mb-1 px-1 text-[11px] text-faint">{isAgent ? `${AGENT_NAME} · AI agent` : call.customer}</span>

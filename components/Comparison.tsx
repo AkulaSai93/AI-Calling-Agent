@@ -89,7 +89,7 @@ export default function Comparison() {
     `${id === vs ? "flex" : "hidden"} md:flex`;
 
   return (
-    <section id="compare" className="mx-auto flex max-w-[1200px] flex-col justify-center px-4 py-16 sm:px-6 md:min-h-[calc(100svh-64px)] md:py-6">
+    <section id="compare" className="mx-auto flex max-w-[1200px] flex-col justify-center px-4 py-16 sm:px-6 md:min-h-[calc(100svh-72px)] md:py-6">
       <div data-reveal className="mx-auto max-w-[720px] text-center">
         <p className="text-gradient text-sm font-medium tracking-wide">Why Voxa</p>
         <h2 className="mt-2 text-[clamp(28px,3.6vw,44px)] leading-[1.08] font-medium tracking-[-0.03em] text-balance">
