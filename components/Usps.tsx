@@ -7,7 +7,7 @@ const usps = [
 
 export default function Usps() {
   return (
-    <ul aria-label="Why Voxa" className="mt-20 grid w-full max-w-[1040px] grid-cols-2 border-y border-line md:grid-cols-4">
+    <ul aria-label="Why Adya" className="mt-20 grid w-full max-w-[1040px] grid-cols-2 border-y border-line md:grid-cols-4">
       {usps.map(({ value, label }, i) => (
         <li
           key={label}

@@ -254,7 +254,7 @@ export function BroadcastVisual({ accent }: { accent: string }) {
 /* ---------- 03 Two-way: live call console ---------- */
 
 const convo = [
-  { ai: true, text: "Hi Neha, it's Aria from Voxa. Got a minute?", tag: null },
+  { ai: true, text: "Hi Neha, it's Aria from Adya. Got a minute?", tag: null },
   { ai: false, text: "Sure! Can we talk in Hindi?", tag: "Language → Hindi" },
   { ai: true, text: "बिल्कुल! आपकी टीम कितनी बड़ी है?", tag: null },
   { ai: false, text: "करीब 40 लोग हैं।", tag: "Team size: 40" },

@@ -248,7 +248,7 @@ export default function CallDemo() {
             </div>
 
             <p className="relative mt-5 text-lg">
-              {AGENT_NAME} <span className="text-faint">·</span> <span className="text-gradient">Voxa AI</span>
+              {AGENT_NAME} <span className="text-faint">·</span> <span className="text-gradient">Adya AI</span>
             </p>
             <p className="relative mt-1 text-sm text-muted">
               {call.direction === "Outbound" ? "Calling" : "Answering"} {call.customer} for {call.company}
@@ -357,7 +357,7 @@ export default function CallDemo() {
 
             <div className="flex items-center gap-3 border-t border-line px-5 py-4 sm:px-6">
               <span className="text-gradient text-2xl font-medium tracking-tight">{call.stat.value}</span>
-              <span className="text-sm text-muted">{call.stat.label} for teams using Voxa for {call.label.toLowerCase()}</span>
+              <span className="text-sm text-muted">{call.stat.label} for teams using Adya for {call.label.toLowerCase()}</span>
             </div>
           </div>
         </div>

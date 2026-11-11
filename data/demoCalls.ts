@@ -1,4 +1,4 @@
-// Sample demo calls shown in the "Hear Voxa on a real call" section.
+// Sample demo calls shown in the "Hear Adya on a real call" section.
 // Copy, companies and stats are placeholders — swap for real ones.
 // To play a real recording, add `audio` (a file in /public) and an `at` (seconds) on every line.
 

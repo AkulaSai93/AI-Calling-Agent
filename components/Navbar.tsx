@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import AdyaMark from "./AdyaMark";
 import { useEffect, useState } from "react";
 
 const links = [
@@ -12,21 +13,11 @@ const links = [
 ];
 
 function Logo() {
-  const bars = [
-    { h: "h-2", delay: "-0.2s" },
-    { h: "h-3.5", delay: "-0.5s" },
-    { h: "h-2.5", delay: "-0.8s" },
-    { h: "h-1.5", delay: "-0.35s" },
-  ];
   return (
-    <Link href="/" aria-label="Voxa AI home" className="inline-flex items-center gap-2.5 text-lg font-semibold tracking-tight">
-      <span aria-hidden className="inline-flex size-8 items-center justify-center gap-[2.5px] rounded-md bg-[linear-gradient(135deg,#a3b0f5,#8898e7_45%,#6f80e0_80%,#5566d4)] shadow-[inset_0_0_0_1px_rgb(255_255_255/0.15),0_6px_20px_-6px_rgb(111_128_224/0.7)]">
-        {bars.map((b, i) => (
-          <i key={i} className={`w-[2.5px] rounded-sm bg-white animate-bar ${b.h}`} style={{ animationDelay: b.delay }} />
-        ))}
-      </span>
+    <Link href="/" aria-label="Adya AI home" className="inline-flex items-center gap-2 text-lg font-semibold tracking-tight">
+      <AdyaMark className="size-9" />
       <span>
-        Voxa<span className="ml-1 text-gradient">AI</span>
+        Adya<span className="ml-1 text-gradient">AI</span>
       </span>
     </Link>
   );

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AdyaMark from "./AdyaMark";
 
 // Hrefs marked "#" are placeholders until those pages / profiles exist.
 const columns = [
@@ -42,12 +43,12 @@ export default function Footer() {
           <div>
             <p className={label}>Get started</p>
             <h2 className="mt-4 text-[clamp(32px,4.6vw,60px)] leading-[1.05] font-light tracking-[-0.035em] text-balance">
-              Let Voxa take <span className="text-[#6e6f78]">the next call</span>
+              Let Adya take <span className="text-[#6e6f78]">the next call</span>
             </h2>
           </div>
           <div className="flex flex-col items-start gap-6 lg:items-end">
-            <a href="mailto:hello@voxa.ai" className="group text-[clamp(20px,2.2vw,28px)] font-light tracking-tight text-body transition-colors hover:text-fg">
-              hello@voxa.ai
+            <a href="mailto:hello@adya.ai" className="group text-[clamp(20px,2.2vw,28px)] font-light tracking-tight text-body transition-colors hover:text-fg">
+              hello@adya.ai
               <span className="block h-px origin-left scale-x-0 bg-fg transition-transform duration-500 group-hover:scale-x-100" />
             </a>
             <a
@@ -68,14 +69,10 @@ export default function Footer() {
         {/* Brand + links */}
         <div className="grid gap-12 py-14 md:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)]">
           <div>
-            <Link href="/" aria-label="Voxa AI home" className="inline-flex items-center gap-2.5 text-lg font-medium tracking-tight">
-              <span aria-hidden className="inline-flex size-8 items-center justify-center gap-[2.5px] rounded-md bg-[linear-gradient(135deg,#a3b0f5,#8898e7_45%,#6f80e0_80%,#5566d4)]">
-                {["h-2", "h-3.5", "h-2.5", "h-1.5"].map((h, i) => (
-                  <i key={i} className={`w-[2.5px] rounded-sm bg-white ${h}`} />
-                ))}
-              </span>
+            <Link href="/" aria-label="Adya AI home" className="inline-flex items-center gap-2 text-lg font-medium tracking-tight">
+              <AdyaMark className="size-9" />
               <span>
-                Voxa<span className="ml-1 text-brand">AI</span>
+                Adya<span className="ml-1 text-brand">AI</span>
               </span>
             </Link>
             <p className="mt-4 max-w-[300px] text-[15px] leading-relaxed text-muted">
@@ -103,7 +100,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="flex flex-col gap-3 border-t border-line py-6 font-mono text-[10.5px] tracking-[0.2em] text-faint uppercase sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Voxa AI · Bengaluru, India</p>
+          <p>© {new Date().getFullYear()} Adya AI · Bengaluru, India</p>
           <p className="flex gap-6">
             <a href="#" className="transition-colors hover:text-fg">
               Privacy
@@ -116,15 +113,15 @@ export default function Footer() {
       </div>
 
       {/* Large wordmark: natural letter spacing, fades into the page bottom */}
-      <svg aria-hidden viewBox="0 0 1000 220" className="mx-auto -mb-[3%] block w-full max-w-[1400px] px-4 select-none">
+      <svg aria-hidden viewBox="0 0 1000 290" className="mx-auto block w-full max-w-[1400px] px-4 select-none">
         <defs>
           <linearGradient id="footer-wordmark" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stopColor="#8898e7" stopOpacity="0.55" />
-            <stop offset="1" stopColor="#8898e7" stopOpacity="0" />
+            <stop offset="0.15" stopColor="#8898e7" stopOpacity="0.55" />
+            <stop offset="1" stopColor="#8898e7" stopOpacity="0.06" />
           </linearGradient>
         </defs>
-        <text x="500" y="200" textAnchor="middle" fill="url(#footer-wordmark)" className="font-sans" style={{ fontSize: 270, fontWeight: 300, letterSpacing: "-0.05em" }}>
-          Voxa AI
+        <text x="500" y="215" textAnchor="middle" fill="url(#footer-wordmark)" className="font-sans" style={{ fontSize: 270, fontWeight: 300, letterSpacing: "-0.05em" }}>
+          Adya AI
         </text>
       </svg>
     </footer>

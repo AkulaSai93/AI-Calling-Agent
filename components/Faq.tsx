@@ -5,12 +5,12 @@ import { useState } from "react";
 // Answers are a starting point — have legal/compliance review the regulatory ones before launch.
 const faqs = [
   {
-    q: "What exactly is Voxa AI?",
-    a: "Voxa is an AI calling platform. It makes and answers phone calls for your business — reminders, keypad (AVR) menus and full two-way conversations — in a natural, human-like voice, at any scale.",
+    q: "What exactly is Adya AI?",
+    a: "Adya is an AI calling platform. It makes and answers phone calls for your business — reminders, keypad (AVR) menus and full two-way conversations — in a natural, human-like voice, at any scale.",
   },
   {
     q: "Will my customers know they're talking to an AI?",
-    a: "Voxa sounds remarkably human, with natural pauses and the ability to handle interruptions. We still recommend a short disclosure at the start of each call, and you can configure exactly how the agent introduces itself.",
+    a: "Adya sounds remarkably human, with natural pauses and the ability to handle interruptions. We still recommend a short disclosure at the start of each call, and you can configure exactly how the agent introduces itself.",
   },
   {
     q: "Which languages and accents do you support?",
@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "How is this different from IVR or robocalls?",
-    a: "IVR plays fixed recordings and waits for key-presses. Voxa understands what the customer actually says, answers follow-up questions, handles objections and takes action — like booking a slot or sending a payment link — during the call.",
+    a: "IVR plays fixed recordings and waits for key-presses. Adya understands what the customer actually says, answers follow-up questions, handles objections and takes action — like booking a slot or sending a payment link — during the call.",
   },
   {
     q: "How long does it take to go live?",
@@ -26,7 +26,7 @@ const faqs = [
   },
   {
     q: "Does it integrate with my CRM and tools?",
-    a: "Yes. Voxa connects to popular CRMs, Google Sheets, WhatsApp and calendars, or to anything else through our API and webhooks. Call outcomes, transcripts and summaries sync back automatically.",
+    a: "Yes. Adya connects to popular CRMs, Google Sheets, WhatsApp and calendars, or to anything else through our API and webhooks. Call outcomes, transcripts and summaries sync back automatically.",
   },
   {
     q: "What happens when the AI can't answer something?",
@@ -34,7 +34,7 @@ const faqs = [
   },
   {
     q: "Is it compliant with Indian calling regulations?",
-    a: "Voxa is built to help you stay compliant: DND scrubbing, calling-hour limits, consent capture, encrypted call data and storage in India. Our team can walk you through the setup for your industry.",
+    a: "Adya is built to help you stay compliant: DND scrubbing, calling-hour limits, consent capture, encrypted call data and storage in India. Our team can walk you through the setup for your industry.",
   },
   {
     q: "How is pricing calculated?",
@@ -77,8 +77,8 @@ export default function Faq() {
               <a href="#demo" data-magnetic className="rounded-md bg-fg px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-white">
                 Talk to us
               </a>
-              <a href="mailto:hello@voxa.ai" className="text-sm text-muted transition-colors hover:text-fg">
-                hello@voxa.ai
+              <a href="mailto:hello@adya.ai" className="text-sm text-muted transition-colors hover:text-fg">
+                hello@adya.ai
               </a>
             </div>
           </div>
@@ -139,8 +139,8 @@ export default function Faq() {
             <a href="#demo" data-magnetic className="rounded-md bg-fg px-4 py-2 text-sm font-medium text-bg transition-colors hover:bg-white">
               Talk to us
             </a>
-            <a href="mailto:hello@voxa.ai" className="text-sm text-muted transition-colors hover:text-fg">
-              hello@voxa.ai
+            <a href="mailto:hello@adya.ai" className="text-sm text-muted transition-colors hover:text-fg">
+              hello@adya.ai
             </a>
           </div>
         </div>

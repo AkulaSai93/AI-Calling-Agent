@@ -7,12 +7,12 @@ const STEP_MS = 3200;
 const steps = [
   {
     title: "Connect your data",
-    text: "Upload a contact list or sync your CRM. Voxa pulls names, dues and history so every call has context.",
+    text: "Upload a contact list or sync your CRM. Adya pulls names, dues and history so every call has context.",
     visual: "connect",
   },
   {
     title: "Design your agent",
-    text: "Describe the goal in plain words, pick a voice and language — Voxa writes the script and the call flow.",
+    text: "Describe the goal in plain words, pick a voice and language — Adya writes the script and the call flow.",
     visual: "design",
   },
   {
@@ -22,7 +22,7 @@ const steps = [
   },
   {
     title: "Track & improve",
-    text: "Every call is transcribed, scored and synced back. See what converts and let Voxa optimise the rest.",
+    text: "Every call is transcribed, scored and synced back. See what converts and let Adya optimise the rest.",
     visual: "track",
   },
 ] as const;

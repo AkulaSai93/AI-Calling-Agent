@@ -12,7 +12,7 @@ const tamil = Noto_Sans_Tamil({ subsets: ["tamil"], weight: ["400", "500"], vari
 const telugu = Noto_Sans_Telugu({ subsets: ["telugu"], weight: ["400", "500"], variable: "--font-telugu", preload: false });
 
 export const metadata: Metadata = {
-  title: "Voxa AI — AI Calling Agents",
+  title: "Adya AI — AI Calling Agents",
   description:
     "Human-like AI calling agents that qualify leads, book meetings and resolve support calls 24/7 in 15+ languages.",
 };

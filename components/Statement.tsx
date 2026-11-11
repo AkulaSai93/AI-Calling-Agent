@@ -1,6 +1,6 @@
 // Big statement whose words light up from grey to white as you scroll (driven by Motion.tsx)
 const text =
-  "Your customers don't want to wait on hold. They want answers in their language, at any hour. Voxa picks up every call, speaks like your best agent, and never takes a day off.";
+  "Your customers don't want to wait on hold. They want answers in their language, at any hour. Adya picks up every call, speaks like your best agent, and never takes a day off.";
 
 export default function Statement() {
   return (

@@ -91,7 +91,7 @@ export default function Benchmarks() {
         })}
       </dl>
 
-      <p className="mt-6 text-center text-xs text-faint sm:text-left">Benchmarks from Voxa production traffic, Jan–Sep 2026. Individual results vary by use case.</p>
+      <p className="mt-6 text-center text-xs text-faint sm:text-left">Benchmarks from Adya production traffic, Jan–Sep 2026. Individual results vary by use case.</p>
     </section>
   );
 }
